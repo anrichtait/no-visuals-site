@@ -1,5 +1,5 @@
-export const WebsiteName: string = "SaaS Starter"
-export const WebsiteBaseUrl: string = "https://saasstarter.work"
+export const WebsiteName: string = "Tait Media Solutions"
+export const WebsiteBaseUrl: string = "https://taitmediasolutions.com"
 export const WebsiteDescription: string =
-  "Open source, fast, and free to host SaaS template. Built with SvelteKit, Supabase, Stripe, Tailwind, DaisyUI, and Postgres"
+  "Tait Media Solutions is a marketing agency focusing on performance."
 export const CreateProfileStep: boolean = true
