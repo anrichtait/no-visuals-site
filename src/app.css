@@ -2,7 +2,7 @@
 
 @plugin '@tailwindcss/typography';
 @plugin "daisyui" {
-  /* Disable all other themes which forces the default theme created below. You can add a dark mode theme using daisyui if you like, and it will automatically use it when the user's system is in dark mode. Docs: https://daisyui.com/docs/themes/ */
+  /* Disable all other themes which forces the default theme created below. */
   themes: false;
 }
 
@@ -12,26 +12,34 @@
   prefersdark: false; /* set as default dark mode (prefers-color-scheme:dark) */
   color-scheme: light; /* color of browser-provided UI */
 
-  --color-primary: #180042;
-  --color-primary-content: #fefbf6;
-  --color-secondary: #c7b9f8;
-  --color-secondary-content: oklch(95% 0 0);
-  --color-accent: #db2777;
-  --color-accent-content: #180042;
-  --color-neutral: #180042;
-  --color-neutral-content: #fefbf6;
-  --color-base-100: #fefbf6;
-  --color-base-200: #faedd6;
-  --color-base-300: oklch(92% 0.04 240);
-  --color-base-content: #180042;
-  --color-info: oklch(70% 0.2 220);
-  --color-info-content: oklch(98% 0.01 220);
-  --color-success: #37d399;
-  --color-success-content: oklch(98% 0.01 140);
-  --color-warning: oklch(80% 0.25 80);
-  --color-warning-content: oklch(20% 0.05 80);
-  --color-error: #f77272;
-  --color-error-content: oklch(98% 0.01 30);
+  /* Primary System: Premium Minimalism */
+  --color-primary: #2C2C2C;        /* Deep Charcoal */
+  --color-primary-content: #FFFFFF; /* text on primary */
+
+  --color-secondary: #E8DDD4;      /* Light Wood (Natural) */
+  --color-secondary-content: #2C2C2C;
+
+  --color-accent: #7C9885;         /* Signal Green (accent/success) */
+  --color-accent-content: #FFFFFF;
+
+  --color-neutral: #2C2C2C;        /* Neutral dark base */
+  --color-neutral-content: #FFFFFF;
+
+  /* Canvas & Foundation */
+  --color-base-100: #FFFFFF;       /* Pure White - canvas */
+  --color-base-200: #F5F3F0;       /* Warm Concrete - foundation */
+  --color-base-300: #F9F7F4;       /* Soft Paper - subtle layering */
+  --color-base-content: #2C2C2C;   /* primary text color */
+
+  /* Tech & accents */
+  --color-info: #8B9A9A;           /* Steel Grey */
+  --color-info-content: #FFFFFF;
+  --color-success: #7C9885;        /* Signal Green */
+  --color-success-content: #FFFFFF;
+  --color-warning: #D4A574;        /* Warning Amber */
+  --color-warning-content: #2C2C2C;
+  --color-error: #A85B5B;          /* Alert Red */
+  --color-error-content: #FFFFFF;
 
   /* border radius */
   --radius-selector: 1rem;
@@ -55,9 +63,6 @@
   The default border color has changed to `currentColor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
   looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
 */
 @layer base {
   *,
@@ -67,22 +72,80 @@
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
   }
+
+  /* Small accessibility helpers based on the new palette */
+  html { background-color: var(--color-base-100); color: var(--color-base-content); }
+  body { background-color: var(--color-base-100); }
 }
 
-a {
-  @apply cursor-pointer;
-}
+/* Utility tweaks to match the premium minimal aesthetic */
+
+a { @apply cursor-pointer; }
 
 /* Hack to temporarily solve https://github.com/supabase/auth-ui/issues/219 */
-.authBtn {
-  @apply btn;
+.authBtn { @apply btn; }
+button[disabled].authBtn { font-size: 0.001px; filter: brightness(65%); }
+button[disabled].authBtn::before { font-size: 14px; content: "Loading..."; color: var(--color-base-content); }
+
+/* Small set of helper classes to make theme tokens easier to use in components */
+:root {
+  --brand: var(--color-primary);
+  --brand-on: var(--color-primary-content);
+  --muted: #8B9A9A; /* steel grey */
+  --bg-canvas: var(--color-base-100);
+  --bg-foundation: var(--color-base-200);
+  --bg-paper: var(--color-base-300);
+  --accent-green: var(--color-accent);
+  --amber: var(--color-warning);
+  --alert-red: var(--color-error);
+  --wood: var(--color-secondary);
 }
-button[disabled].authBtn {
-  font-size: 0.001px;
-  filter: brightness(65%);
+
+/* Example component tweaks for a minimal look */
+.card {
+  background-color: var(--bg-foundation); /* warm concrete */
+  border: var(--border) solid rgba(0,0,0,0.04);
+  border-radius: var(--radius-box);
 }
-button[disabled].authBtn::before {
-  font-size: 14px;
-  content: "Loading...";
-  color: oklch(var(--pc));
+
+.hr-subtle {
+  height: 1px;
+  background: linear-gradient(90deg, rgba(0,0,0,0.035), rgba(0,0,0,0.02));
+}
+
+.text-muted { color: var(--muted); }
+
+/* Forms: subtle fields matching the palette */
+.input, .select, textarea {
+  background-color: var(--bg-paper);
+  border: 1px solid rgba(44,44,44,0.06);
+  color: var(--color-base-content);
+  border-radius: var(--radius-field);
+}
+
+/* Buttons: primary and ghost styles tuned to palette */
+.btn-primary {
+  background-color: var(--brand);
+  color: var(--brand-on);
+  border: 0;
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--brand);
+  border: 1px solid rgba(44,44,44,0.06);
+}
+
+/* Status badges */
+.badge-success { background: var(--accent-green); color: #fff; }
+.badge-warning { background: var(--amber); color: var(--color-base-content); }
+.badge-error { background: var(--alert-red); color: #fff; }
+
+/* Typography plugin baseline adjustments */
+.prose {
+  color: var(--color-base-content);
+}
+
+/* Respect user reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
 }
