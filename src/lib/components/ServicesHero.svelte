@@ -30,7 +30,7 @@
         'Integrated analytics dashboard from day one'
       ],
       ctaText: 'Explore The Foundation →',
-      ctaHref: '#web-design',
+          ctaHref: '/services',
       bgImage: '/images/services.jpg',
       bgImageAlt: 'screen',
     },
@@ -47,7 +47,7 @@
         'Transparent monthly reporting'
       ],
       ctaText: 'Power Your Growth →',
-      ctaHref: '#marketing',
+          ctaHref: '/services',
       bgImage: '/images/services1.jpg',
       bgImageAlt: 'A dashboard with analytics graphs and charts',
     }
