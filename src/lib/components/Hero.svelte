@@ -3,7 +3,7 @@
   import { fade } from "svelte/transition";
 
   let current: number = 0;
-  let timer: number;
+  let timer: ReturnType<typeof setInterval>;
 
   const slides = [
     { src: 'images/hero1.jpg', alt: 'Hero Image 1' },

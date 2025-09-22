@@ -3,7 +3,7 @@
   // Svelte 5 single-file component (TypeScript) implementing a responsive, accessible
   // interactive split-screen services hero with hover/focus/touch support.
 
-  export type Service = {
+  type Service = {
     id: string;
     title: string; // base headline (eg. "Web Design")
     subtitle?: string; // base subheading
@@ -15,6 +15,8 @@
     bgImage?: string; // url
     bgImageAlt?: string;
   };
+
+
 
   export let services: Service[] = [
     {
@@ -54,7 +56,6 @@
   ];
 
   let hoveredIndex: number | null = null;
-
   let activeIndex: number | null = null;
 
   const prefersReducedMotion = typeof window !== 'undefined' &&
@@ -83,12 +84,33 @@
   }
 
   function onTouchToggle(index: number) {
+    // FIX: If clicking the same card that's already active, close it
     if (activeIndex === index) {
-      const href = services[index]?.ctaHref;
-      if (href) window.location.href = href;
+      activeIndex = null;
+      hoveredIndex = null; // Also clear hover state
       return;
     }
+
+    // If it's a different card, activate it
     activeIndex = index;
+    hoveredIndex = null; // Clear hover state when clicking
+  }
+
+  // FIX: Add click outside handler to close active cards
+  function handleClickOutside(event: MouseEvent) {
+    const target = event.target as Element;
+    if (!target.closest('.service-half')) {
+      activeIndex = null;
+      hoveredIndex = null;
+    }
+  }
+
+  // FIX: Add escape key handler specifically for mobile
+  function handleEscape(event: KeyboardEvent) {
+    if (event.key === 'Escape') {
+      activeIndex = null;
+      hoveredIndex = null;
+    }
   }
 
   function preloadImages() {
@@ -105,6 +127,8 @@
   }
 </script>
 
+<svelte:window on:click={handleClickOutside} on:keydown={handleEscape} />
+
 <section
   class="services-hero"
   role="region"
@@ -119,7 +143,7 @@
       on:mouseleave={() => (hoveredIndex = null)}
       on:focusin={() => (hoveredIndex = i)}
       on:focusout={() => (hoveredIndex = null)}
-      on:click={() => onTouchToggle(i)}
+      on:click|stopPropagation={() => onTouchToggle(i)}
       role="button"
       aria-pressed={activeIndex === i}
       tabindex="0"
@@ -166,6 +190,7 @@
   {/each}
 </section>
 
+<!-- Rest of your existing styles remain the same -->
 <style>
   :global(:root) {
     --transition: 450ms cubic-bezier(.2,.9,.2,1);
@@ -176,6 +201,7 @@
     height: 100vh;
     width: 100%;
     outline: none;
+    position:relative;
   }
 
   .service-half {
@@ -186,7 +212,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: flex 600ms ease, transform 300ms ease;
+    transition: all 600ms , cubic-bezier(0.16, 1, 0.3, 1);
     border-right: 1px solid rgba(255, 255, 255, 0.15);
   }
 
@@ -231,7 +257,7 @@
     font-size: clamp(2.5rem, 5vw, 4rem);
     font-weight: 700;
     margin: 0;
-    letter-spacing: -0.04em;
+    letter-spacing: -0.02em;
     line-height: 0.9;
     text-transform: uppercase;
   }
@@ -240,10 +266,10 @@
     margin-top: 1rem;
     opacity: 0.85;
     font-family: 'Inter', ui-sans-serif, system-ui, -apple-system;
-    font-size: clamp(0.875rem, 1.8vw, 1.125rem);
+    font-size: clamp(0.875rem, 1.8vw, 1rem);
     font-weight: 400;
-    letter-spacing: 0.02em;
-    line-height: 1.4;
+    letter-spacing: 0.01em;
+    line-height: 1.5;
   }
 
   .service-hover-content {
@@ -341,8 +367,8 @@
     transform: translateY(-1px);
   }
 
-  .cta-button:active { 
-    transform: translateY(0); 
+  .cta-button:active {
+    transform: translateY(0);
   }
 
   /* accessibility: focus visible outlines */
@@ -353,12 +379,12 @@
 
   /* Mobile: stack vertically */
   @media (max-width: 900px) {
-    .services-hero { 
-      flex-direction: column; 
-      height: auto; 
+    .services-hero {
+      flex-direction: column;
+      height: auto;
     }
-    .service-half { 
-      width: 100%; 
+    .service-half {
+      width: 100%;
       min-height: 60vh;
       border-right: none;
       border-left: none;
@@ -368,18 +394,18 @@
       border-left: none;
       border-bottom: none;
     }
-    .service-half.is-active { 
-      min-height: 75vh; 
+    .service-half.is-active {
+      min-height: 75vh;
     }
-    
+
     .title {
       font-size: clamp(2rem, 8vw, 3rem);
     }
-    
+
     .hover-headline {
       font-size: clamp(1.5rem, 6vw, 2.25rem);
     }
-    
+
     .service-hover-content {
       padding: 2rem 1.5rem;
     }

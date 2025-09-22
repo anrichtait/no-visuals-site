@@ -17,6 +17,13 @@ export default defineConfig({
       },
     },
   ],
+  optimizeDeps: {
+    exclude: ["@threlte/core", "@threlte/extras"],
+    include: ["three", "lucide-svelte"]
+  },
+  ssr: {
+    noExternal: ["@threlte/core", "@threlte/extras", "three"]
+  },
   test: {
     include: ["src/**/*.{test,spec}.{js,ts}"],
     globals: true, /// allows to skip import of test functions like `describe`, `it`, `expect`, etc.

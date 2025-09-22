@@ -22,12 +22,12 @@
 <section bind:this={rootEl}
     aria-labelledby="usp-title"
     class="mx-auto max-w-7xl px-6 py-16 md:py-28">
-    
+
     <div class="grid grid-cols-1 lg:grid-cols-[25%_1fr] gap-16 lg:gap-20 items-center">
         <!-- SVG Container - 25% width, vertically centered -->
         <div class="flex items-center justify-center order-2 lg:order-1">
             <div class="w-full max-w-[280px] lg:max-w-none aspect-[384/766] flex items-center justify-center">
-                <slot name="svg"> 
+                <slot name="svg">
 
                     <svg width="384" height="766" viewBox="0 0 384 766" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="228.284" cy="144" r="8" fill="#7C9885"/>
@@ -206,56 +206,54 @@
 
             <!-- Main Headline -->
             <div class="space-y-4">
-                <h1 id="usp-title" class="font-syne font-bold uppercase text-4xl sm:text-5xl lg:text-6xl leading-[1.1] tracking-tight">
-                    <span class="block">Powered by the</span>
+                <h1 id="usp-title" class="font-syne font-bold uppercase text-4xl sm:text-5xl lg:text-6xl leading-[0.9] tracking-tight">
+                    <span class="block opacity-70 text-2xl font-normal mb-2 font-inter tracking-normal normal-case">Powered by the</span>
                     <span class="block">No Visuals</span>
-                    <span class="flex items-center gap-4">
+                    <span class="flex items-center gap-6">
                         <span class="">Data Engine</span>
-                        <span class="inline-block h-1.5 w-16 rounded-full" style="background:{accent}"></span>
+                        <span class="inline-block h-1 w-20 rounded-full bg-gradient-to-r from-[#7C9885] to-transparent"></span>
                     </span>
                 </h1>
             </div>
 
             <!-- Supporting Content -->
-            <div class={`space-y-6 max-w-2xl transition-all duration-700 delay-300 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+            <div class="space-y-6">
                 <p class="text-xl font-inter leading-relaxed ">
                     Our proprietary analytics engine cuts through the noise to show you the exact ROI of every visitor, click, and lead.
                 </p>
 
-                <div class="space-y-4">
+                <div class="space-y-6">
                     <p class="text-lg leading-relaxed font-inter">
                         While other agencies hide behind vague reports, we provide radical transparency. The No Visuals Data Engine is built into every site we design, giving you a clear, actionable window into your marketing performance and full ownership of your client data.
                     </p>
                 </div>
 
-                <!-- Key Benefits -->
-                <div class="grid sm:grid-cols-2 gap-4 pt-4">
-                    <div class="flex items-start space-x-3">
-                        <div class="w-1.5 h-1.5 rounded-full mt-2.5" style="background:{accent}"></div>
-                        <span class="text-sm font-medium font-inter">Real-time ROI tracking</span>
+                <div class="grid sm:grid-cols-2 gap-6 pt-8">
+                    <div class="flex items-start space-x-4 p-4 rounded-xl bg-white/40 border border-white/60">
+                        <div class="w-2 h-2 rounded-full mt-2" style="background:#7C9885"></div>
+                        <span class="text-sm font-medium font-inter text-[#2C2C2C]">Real-time ROI tracking</span>
                     </div>
-                    <div class="flex items-start space-x-3">
-                        <div class="w-1.5 h-1.5 rounded-full mt-2.5" style="background:{accent}"></div>
-                        <span class="text-sm font-medium font-inter">Full data ownership</span>
+                    <div class="flex items-start space-x-4 p-4 rounded-xl bg-white/40 border border-white/60">
+                        <div class="w-2 h-2 rounded-full mt-2" style="background:#7C9885"></div>
+                        <span class="text-sm font-medium font-inter text-[#2C2C2C]">Full data ownership</span>
                     </div>
-                    <div class="flex items-start space-x-3">
-                        <div class="w-1.5 h-1.5 rounded-full mt-2.5" style="background:{accent}"></div>
-                        <span class="text-sm font-medium font-inter">Radical transparency</span>
+                    <div class="flex items-start space-x-4 p-4 rounded-xl bg-white/40 border border-white/60">
+                        <div class="w-2 h-2 rounded-full mt-2" style="background:#7C9885"></div>
+                        <span class="text-sm font-medium font-inter text-[#2C2C2C]">Radical transparency</span>
                     </div>
-                    <div class="flex items-start space-x-3">
-                        <div class="w-1.5 h-1.5 rounded-full mt-2.5" style="background:{accent}"></div>
-                        <span class="text-sm font-medium font-inter">Actionable insights</span>
+                    <div class="flex items-start space-x-4 p-4 rounded-xl bg-white/40 border border-white/60">
+                        <div class="w-2 h-2 rounded-full mt-2" style="background:#7C9885"></div>
+                        <span class="text-sm font-medium font-inter text-[#2C2C2C]">Actionable insights</span>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </section>
 
 <style>
-svg { 
-    width: 100%; 
-    height: auto; 
-    display: block; 
+svg {
+    width: 100%;
+    height: auto;
+    display: block;
 }
 </style>
