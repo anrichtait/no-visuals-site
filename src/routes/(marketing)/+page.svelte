@@ -88,19 +88,15 @@ JSON.stringify(ldJson) + "<"
 </main>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Inter:wght@300;400;500;700&display=swap');
-
 .dark-section {
     background-color: #2C2C2C;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .light-section {
     background-color: #F5F3F0;
-    height: 100vh;
+    min-height: 100vh;
 }
-
-
 
   .wrapper-inner {
       display: block;
@@ -115,8 +111,9 @@ JSON.stringify(ldJson) + "<"
       font-size: 1.125rem;
       line-height: 1.75;
       color: #040617;
-      font-family: inter,sans-serif;
+      font-family: Inter, sans-serif;
       font-weight: 300;
+      font-display: swap;
   }
 
   .content-block-about {
@@ -131,11 +128,10 @@ strong {
 
 .projects-section {
     background-color: #F5F3F0;
-    min-height: 100vh; /* Use min-height instead of fixed height */
+    min-height: 100vh;
 }
 
 .cta-section {
     background-color: #2C2C2C;
-    /* No height constraint - let the component manage its own height */
 }
 </style>

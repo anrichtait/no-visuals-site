@@ -144,14 +144,6 @@ import { Mail, ExternalLink } from 'lucide-svelte'
           © {currentYear} {WebsiteName}. All rights reserved.
         </p>
 
-        <div class="flex items-center gap-6 text-sm">
-          <a href="/privacy" class="text-white/60 hover:text-white transition-colors duration-200">
-            Privacy Policy
-          </a>
-          <a href="/terms" class="text-white/60 hover:text-white transition-colors duration-200">
-            Terms of Service
-          </a>
-        </div>
       </div>
     </div>
 

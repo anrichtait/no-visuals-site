@@ -1,12 +1,13 @@
 <script lang="ts">
+import LazyThreeD from "$lib/components/LazyThreeD.svelte";
 import Static3DScene from "$lib/components/3d/Static3DScene.svelte";
 import Phase1Scene from "$lib/components/3d/Phase1Scene.svelte";
 import Phase2Scene from "$lib/components/3d/Phase2Scene.svelte";
 import Phase3Scene from "$lib/components/3d/Phase3Scene.svelte";
 
-// Hover state management
-let hoveredPhase: string | null = null;
-let activePhase: string | null = null;
+// Hover state management with Svelte 5 runes
+let hoveredPhase = $state<string | null>(null);
+let activePhase = $state<string | null>(null);
 
 // Phase data with hover content
 const phases = [
@@ -58,323 +59,119 @@ function onTouchToggle(phaseId: string) {
   }
   activePhase = phaseId;
 }
+
+function handleKeyPress(event: KeyboardEvent, phaseId: string) {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    onTouchToggle(phaseId);
+  }
+}
 </script>
 
-<section class="process-section">
+<section class="w-full bg-gray-800 p-5 grid grid-rows-[25%_75%] lg:grid-cols-3 lg:grid-rows-none gap-5 min-h-screen box-border">
   <!-- Main title spanning full width -->
-  <div class="section-title-container">
-    <h2 class="section-title">The Process</h2>
+  <div class="lg:col-span-3 flex items-start">
+    <h2 class="font-syne text-6xl md:text-8xl lg:text-9xl font-normal text-gray-200 m-0 leading-tight">The Process</h2>
   </div>
 
   <!-- Three phase cards in a row -->
   {#each phases as phase, i}
-    <div
-      class="phase-card {hoveredPhase === phase.id || activePhase === phase.id ? 'is-hovered' : ''}"
+    <button
+      type="button"
+      class="border-0 bg-transparent rounded-lg p-2.5 grid grid-rows-[auto_1fr] gap-2.5 overflow-hidden relative cursor-pointer transition-all duration-300 ease-in-out w-full text-left hover:transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-white/30 focus:transform focus:-translate-y-1 focus:shadow-2xl {hoveredPhase === phase.id || activePhase === phase.id ? 'transform -translate-y-1 shadow-2xl' : ''}"
       on:mouseenter={() => (hoveredPhase = phase.id)}
       on:mouseleave={() => (hoveredPhase = null)}
       on:click={() => onTouchToggle(phase.id)}
-      role="button"
-      tabindex="0"
+      on:keydown={(e) => handleKeyPress(e, phase.id)}
+      aria-expanded={hoveredPhase === phase.id || activePhase === phase.id}
+      aria-describedby="phase-content-{phase.id}"
     >
-      <div class="phase-header">
-        <h3 class="phase-title">{phase.title}</h3>
-        <h4 class="phase-subtitle">{phase.subtitle}</h4>
+      <div class="p-2.5 bg-transparent relative z-10">
+        <h3 class="font-inter text-3xl md:text-4xl lg:text-5xl font-normal text-white m-0 mb-2.5 leading-tight">{phase.title}</h3>
+        <h4 class="font-inter text-3xl md:text-4xl lg:text-5xl font-normal text-white m-0 leading-tight">{phase.subtitle}</h4>
       </div>
 
-      <div class="component-placeholder">
-        <Static3DScene>
-          <svelte:component this={phase.component} />
-        </Static3DScene>
+      <div class="bg-transparent flex items-center justify-center min-h-[200px] relative rounded-lg overflow-hidden">
+        <LazyThreeD>
+          <Static3DScene>
+            <svelte:component this={phase.component} />
+          </Static3DScene>
+        </LazyThreeD>
 
         <!-- Hover indicator -->
         {#if hoveredPhase !== phase.id && activePhase !== phase.id}
-          <div class="hover-indicator">
-            <span class="hover-text">Hover to explore</span>
-            <div class="hover-cursor">⬅</div>
+          <div class="absolute bottom-4 right-4 flex items-center gap-2 px-3 py-2 bg-black/80 rounded-full text-white text-sm font-inter opacity-80 transition-opacity duration-300 pointer-events-none z-30" aria-hidden="true">
+            <span class="font-normal">Hover to explore</span>
+            <div class="text-base animate-bounce-x">⬅</div>
           </div>
         {/if}
       </div>
 
       <!-- Hover/expanded content -->
       <div
-        class="phase-hover-content"
-        class:is-visible={hoveredPhase === phase.id || activePhase === phase.id}
+        id="phase-content-{phase.id}"
+        class="absolute inset-0 bg-gray-800/95 border border-white/15 z-40 flex items-center justify-center p-8 box-border opacity-0 transform translate-y-3 transition-all duration-450 ease-out text-white text-center rounded-lg shadow-lg {hoveredPhase === phase.id || activePhase === phase.id ? 'opacity-100 transform translate-y-0' : ''}"
+        aria-live="polite"
       >
-        <div class="hover-inner">
-          <h3 class="hover-headline">{phase.hoverHeadline}</h3>
-          <p class="hover-desc">{phase.hoverDescription}</p>
+        <div class="max-w-md">
+          <h3 class="m-0 mb-6 font-syne text-2xl md:text-3xl font-semibold tracking-tight leading-tight text-gray-200">{phase.hoverHeadline}</h3>
+          <p class="m-0 mb-6 font-inter text-sm md:text-base leading-relaxed font-normal opacity
+-90">{phase.hoverDescription}</p>
 
-          <ul class="hover-bullets">
+          <ul class="text-left m-0 pl-0 list-none font-inter">
             {#each phase.hoverBullets as bullet}
-              <li>{bullet}</li>
+              <li class="my-3 pl-6 relative text-xs md:text-sm leading-snug font-normal before:content-['—'] before:absolute before:left-0 before:text-white/60 before:font-light">{bullet}</li>
             {/each}
           </ul>
         </div>
       </div>
-    </div>
+    </button>
   {/each}
 </section>
 
 <style>
-.process-section {
-  width: 100%;
-  background: #2c2c2c;
-  padding: 20px;
-  display: grid;
-  grid-template-rows: 25% 75%;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-.section-title-container {
-  grid-column: 1 / 4;
-  grid-row: 1;
-  display: flex;
-  align-items: flex-start;
-}
-
-.section-title {
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(4rem, 10vw, 9rem);
-  font-weight: 400;
-  color: #ebebf4;
-  margin: 0;
-  line-height: 1.2;
-}
-
-.phase-card {
-  grid-row: 2;
-  border-radius: 8px;
-  padding: 10px;
-  display: grid;
-  grid-template-rows: auto 1fr;
-  gap: 10px;
-  background: transparent;
-  overflow: hidden;
-  position: relative;
-  cursor: pointer;
-  transition: transform 300ms ease, box-shadow 300ms ease;
-}
-
-.phase-card:nth-child(2) {
-  grid-column: 1;
-}
-
-.phase-card:nth-child(3) {
-  grid-column: 2;
-}
-
-.phase-card:nth-child(4) {
-  grid-column: 3;
-}
-
-.phase-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
-}
-
-/* Phase headers */
-.phase-header {
-  padding: 10px;
-  background: transparent;
-  position: relative;
-  z-index: 2;
-}
-
-.phase-title {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(2rem, 4vw, 3.125rem);
-  font-weight: 400;
-  color: white;
-  margin: 0 0 10px 0;
-  line-height: 1.2;
-}
-
-.phase-subtitle {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(2rem, 4vw, 3.125rem);
-  font-weight: 400;
-  color: white;
-  margin: 0;
-  line-height: 1.2;
-}
-
-/* 3D component area */
-.component-placeholder {
-  background: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-  position: relative;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* Hover indicator */
-.hover-indicator {
-  position: absolute;
-  bottom: 16px;
-  right: 16px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(8px);
-  border-radius: 20px;
-  color: white;
-  font-size: 0.875rem;
-  font-family: 'Inter', sans-serif;
-  opacity: 0.8;
-  transition: opacity 300ms ease;
-  pointer-events: none;
-  z-index: 3;
-}
-
-.hover-text {
-  font-weight: 400;
-}
-
-.hover-cursor {
-  font-size: 1rem;
-  animation: bounce 2s ease-in-out infinite;
-}
-
-@keyframes bounce {
+@keyframes bounce-x {
   0%, 100% { transform: translateX(0); }
   50% { transform: translateX(-4px); }
 }
 
-/* Hover/expanded content */
-.phase-hover-content {
-  position: absolute;
-  inset: 0;
-  backdrop-filter: blur(16px) saturate(1.8);
-  background: rgba(44, 44, 44, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  z-index: 4;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1.5rem;
-  box-sizing: border-box;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 450ms cubic-bezier(.2,.9,.2,1), transform 450ms cubic-bezier(.2,.9,.2,1);
-  color: #fff;
-  text-align: center;
-  border-radius: 8px;
-}
-
-.phase-hover-content.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.hover-inner {
-  max-width: 36ch;
-}
-
-.hover-headline {
-  margin: 0 0 1.5rem 0;
-  font-family: 'Syne', sans-serif;
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  color: #ebebf4;
-}
-
-.hover-desc {
-  margin: 0 0 1.5rem 0;
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(0.875rem, 1.5vw, 1rem);
-  line-height: 1.5;
-  font-weight: 400;
-  opacity: 0.9;
-}
-
-.hover-bullets {
-  text-align: left;
-  margin: 0;
-  padding-left: 0;
-  list-style: none;
-  font-family: 'Inter', sans-serif;
-}
-
-.hover-bullets li {
-  margin: 0.75rem 0;
-  padding-left: 1.5rem;
-  position: relative;
-  font-size: clamp(0.75rem, 1.4vw, 0.875rem);
-  line-height: 1.4;
-  font-weight: 400;
-}
-
-.hover-bullets li::before {
-  content: "—";
-  position: absolute;
-  left: 0;
-  color: rgba(255, 255, 255, 0.6);
-  font-weight: 300;
+.animate-bounce-x {
+  animation: bounce-x 2s ease-in-out infinite;
 }
 
 /* Responsive - stack on mobile */
-@media (max-width: 768px) {
-  .process-section {
+@media (max-width: 1023px) {
+  section {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;
     gap: 15px;
     padding: 15px;
   }
 
-  .section-title-container {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .phase-card:nth-child(2) {
-    grid-column: 1;
-    grid-row: 2;
-  }
-
-  .phase-card:nth-child(3) {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
-  .phase-card:nth-child(4) {
-    grid-column: 1;
-    grid-row: 4;
-  }
-
-  .component-placeholder {
+  .min-h-[200px] {
     min-height: 150px;
   }
 
-  .phase-hover-content {
+  .p-8 {
     padding: 1.5rem 1rem;
   }
 }
 
-@media (max-width: 480px) {
-  .process-section {
+@media (max-width: 479px) {
+  section {
     padding: 10px;
     gap: 10px;
   }
 
-  .phase-header {
+  .p-2\.5 {
     padding: 8px;
   }
 
-  .component-placeholder {
+  .min-h-[200px] {
     min-height: 120px;
   }
 
-  .hover-indicator {
+  .absolute.bottom-4.right-4 {
     bottom: 12px;
     right: 12px;
     padding: 6px 10px;
@@ -384,8 +181,8 @@ function onTouchToggle(phaseId: string) {
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .phase-card { transition: none; }
-  .phase-hover-content { transition: none; }
-  .hover-cursor { animation: none; }
+  button { transition: none; }
+  .transition-all { transition: none; }
+  .animate-bounce-x { animation: none; }
 }
 </style>

@@ -2,12 +2,20 @@
   import { onMount, onDestroy } from "svelte";
   import { fade } from "svelte/transition";
 
-  let current: number = 0;
-  let timer: ReturnType<typeof setInterval>;
+  let current = $state(0);
+  let timer = $state<ReturnType<typeof setInterval>>();
 
   const slides = [
-    { src: 'images/hero1.jpg', alt: 'Hero Image 1' },
-    { src: 'images/hero2.jpg', alt: 'Hero Image 2' },
+    {
+      webp: 'images/hero1-desktop.webp',
+      webpMobile: 'images/hero1-mobile.webp',
+      alt: 'Hero Image 1' 
+    },
+    { 
+      webp: 'images/hero2-desktop.webp',
+      webpMobile: 'images/hero2-mobile.webp', 
+      alt: 'Hero Image 2' 
+    },
   ];
 
   onMount(() => {
@@ -19,10 +27,8 @@
   });
 
   onDestroy(() => {
-    clearInterval(timer);
+    if (timer) clearInterval(timer);
   });
-
-  const videoFormats = (src: string) => /\.(mp4|webm|ogg)$/i.test(src);
 </script>
 
 <div class="hero">
@@ -33,18 +39,28 @@
       in:fade={{ duration: 1000 }}
       out:fade={{ duration: 1000 }}
     >
-      {#if videoFormats(slide.src)}
-        <video
-          src={slide.src}
-          autoplay
-          muted
-          loop
-          playsinline
+      <picture>
+        <source 
+          media="(max-width: 768px)" 
+          srcset="{slide.webpMobile}" 
+          type="image/webp"
+        />
+        <source 
+          media="(min-width: 769px)" 
+          srcset="{slide.webp}" 
+          type="image/webp"
+        />
+        <img 
+          src={slide.webp} 
+          alt={slide.alt} 
           class="slide"
-        ></video>
-      {:else}
-        <img src={slide.src} alt={slide.alt} class="slide" />
-      {/if}
+          loading={i === 0 ? "eager" : "lazy"}
+          decoding="async"
+          fetchpriority={i === 0 ? "high" : "low"}
+          width="1920"
+          height="1080"
+        />
+      </picture>
     </div>
   {/each}
 
@@ -58,8 +74,6 @@
 </div>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400..800&display=swap');
-
   .hero {
     position: relative;
     top: 0;
@@ -104,7 +118,7 @@
   .hero-heading {
     font-family: 'Syne', sans-serif;
     font-weight: 400;
-    font-style: bold;
+    font-display: swap;
     font-size: clamp(3rem, 10vw, 12rem);
     line-height: 0.7;
     letter-spacing: -0.05em;
@@ -133,7 +147,6 @@
     .text-overlay {
         bottom: clamp(1rem, 12vw, 2rem);
         left: clamp(1rem, 12vw, 2rem);
-      left: 1.5rem;
     }
   }
 </style>

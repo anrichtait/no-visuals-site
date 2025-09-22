@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  export let accent: string = '#565656';
 
-  let rootEl: HTMLElement | null = null;
-  let visible = false;
+  let rootEl = $state<HTMLElement | null>(null);
+  let visible = $state(false);
+</script>
 
   onMount(() => {
     if (!rootEl) return;
@@ -246,6 +246,7 @@
                         <span class="text-sm font-medium font-inter text-[#2C2C2C]">Actionable insights</span>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </section>
