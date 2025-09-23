@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
-  import { X, Menu } from 'lucide-svelte';
+  import { X, Menu } from '$lib/icons';
   import { onMount } from 'svelte';
   import ButtonWithIcon from './ButtonWithIcon.svelte';
 

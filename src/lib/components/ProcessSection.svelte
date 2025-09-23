@@ -141,42 +141,19 @@ function handleKeyPress(event: KeyboardEvent, phaseId: string) {
 
 /* Responsive - stack on mobile */
 @media (max-width: 1023px) {
-  section {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
-    gap: 15px;
-    padding: 15px;
-  }
-
-  .min-h-[200px] {
-    min-height: 150px;
-  }
-
-  .p-8 {
-    padding: 1.5rem 1rem;
-  }
+section {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto auto;
+  gap: 15px;
+  padding: 15px;
+}
 }
 
 @media (max-width: 479px) {
-  section {
-    padding: 10px;
-    gap: 10px;
-  }
-
-  .p-2\.5 {
-    padding: 8px;
-  }
-
-  .min-h-[200px] {
-    min-height: 120px;
-  }
-
-  .absolute.bottom-4.right-4 {
-    bottom: 12px;
-    right: 12px;
-    padding: 6px 10px;
-    font-size: 0.75rem;
-  }
+section {
+  padding: 10px;
+  gap: 10px;
+}
 }
 
 /* Reduced motion support */

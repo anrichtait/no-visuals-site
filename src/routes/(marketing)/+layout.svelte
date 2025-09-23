@@ -1,7 +1,7 @@
 <script lang="ts">
 import { WebsiteName, ContactEmail } from "./../../config"
 import NavBar from "$lib/components/NavBar.svelte"
-import { Mail, ExternalLink } from 'lucide-svelte'
+import { Mail, ExternalLink } from '$lib/icons'
   import "../../app.css"
 
   interface Props {

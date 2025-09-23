@@ -1,5 +1,5 @@
 <script lang="ts">
-import { ExternalLink, ArrowRight, CheckCircle, BarChart3, Zap } from 'lucide-svelte';
+import { ExternalLink, ArrowRight, CheckCircle, BarChart3, Zap } from '$lib/icons';
 </script>
 
 <section class="cta-section" data-theme="dark">

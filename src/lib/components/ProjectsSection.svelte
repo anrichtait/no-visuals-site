@@ -1,5 +1,5 @@
 <script>
-import { ExternalLink, Clock, Sparkles } from 'lucide-svelte';
+import { ExternalLink, Clock, Sparkles } from '$lib/icons';
 
 export let projects = [
   {

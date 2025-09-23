@@ -3,7 +3,6 @@
 
   let rootEl = $state<HTMLElement | null>(null);
   let visible = $state(false);
-</script>
 
   onMount(() => {
     if (!rootEl) return;
