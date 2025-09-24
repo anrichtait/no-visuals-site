@@ -10,13 +10,7 @@
     <loc>https://taitmediasolutions.com/blog</loc>
   </url>
   <url>
-    <loc>https://taitmediasolutions.com/blog/awesome_post</loc>
-  </url>
-  <url>
-    <loc>https://taitmediasolutions.com/blog/example_blog_post</loc>
-  </url>
-  <url>
-    <loc>https://taitmediasolutions.com/blog/how_we_built_our_41kb_saas_website</loc>
+    <loc>https://taitmediasolutions.com/blog/why_i_migrated_our_agency_to_svelte</loc>
   </url>
   <url>
     <loc>https://taitmediasolutions.com/contact_us</loc>
@@ -35,6 +29,9 @@
   </url>
   <url>
     <loc>https://taitmediasolutions.com/login/sign_up</loc>
+  </url>
+  <url>
+    <loc>https://taitmediasolutions.com/newsletter-signup</loc>
   </url>
   <url>
     <loc>https://taitmediasolutions.com/pricing</loc>

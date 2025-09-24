@@ -7,7 +7,7 @@ export const actions = {
     const errors: { [fieldName: string]: string } = {}
 
     const email = formData.get("email")?.toString() ?? ""
-
+    
     if (email.length < 6 || !email.includes("@")) {
       errors["email"] = "Please enter a valid email address"
     }
