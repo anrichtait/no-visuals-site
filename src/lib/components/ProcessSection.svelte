@@ -5,161 +5,279 @@ import Phase1Scene from "$lib/components/3d/Phase1Scene.svelte";
 import Phase2Scene from "$lib/components/3d/Phase2Scene.svelte";
 import Phase3Scene from "$lib/components/3d/Phase3Scene.svelte";
 
-// Hover state management with Svelte 5 runes
-let hoveredPhase = $state<string | null>(null);
-let activePhase = $state<string | null>(null);
+// Enhanced state management with Svelte 5 runes
+let selectedPhase = $state<number>(0);
+let isTransitioning = $state<boolean>(false);
 
-// Phase data with hover content
+// Enhanced phase data
 const phases = [
   {
     id: 'phase1',
-    title: 'Phase 1:',
-    subtitle: 'Foundation & Optimization',
-    hoverHeadline: 'Building Your Foundation',
-    hoverDescription: 'We start with the basics - setting up your digital infrastructure, optimizing your existing assets, and establishing tracking systems that give you clear visibility into what\'s working.',
-    hoverBullets: [
-      'Website audit and optimization',
-      'Analytics setup and dashboard',
-      'SEO foundation and technical fixes'
+    number: '01',
+    title: 'Foundation & Optimization',
+    subtitle: 'Building Your Digital Foundation',
+    description: 'We start with the basics - setting up your digital infrastructure, optimizing your existing assets, and establishing tracking systems that give you clear visibility into what\'s working.',
+    features: [
+      'Complete website audit and technical optimization',
+      'Analytics setup with custom dashboard integration',
+      'SEO foundation with keyword strategy',
+      'Performance optimization for speed and conversion'
     ],
-    component: Phase1Scene
+    component: Phase1Scene,
+    color: '#7C9885'
   },
   {
     id: 'phase2',
-    title: 'Phase 2:',
-    subtitle: 'Content & Growth',
-    hoverHeadline: 'Scaling Your Presence',
-    hoverDescription: 'With your foundation solid, we focus on creating compelling content and strategic campaigns that attract your ideal clients and showcase your expertise in the market.',
-    hoverBullets: [
-      'Content strategy and creation',
-      'Lead generation campaigns',
-      'Brand positioning and messaging'
+    number: '02',
+    title: 'Content & Growth',
+    subtitle: 'Scaling Your Digital Presence',
+    description: 'With your foundation solid, we focus on creating compelling content and strategic campaigns that attract your ideal clients and showcase your expertise in the market.',
+    features: [
+      'Content strategy aligned with buyer journey',
+      'Lead generation campaigns with A/B testing',
+      'Brand positioning and messaging refinement',
+      'Social media integration and automation'
     ],
-    component: Phase2Scene
+    component: Phase2Scene,
+    color: '#D4A574'
   },
   {
     id: 'phase3',
-    title: 'Phase 3:',
-    subtitle: 'Scale & Amplify',
-    hoverHeadline: 'Maximum Growth',
-    hoverDescription: 'Now we amplify what\'s working. We scale successful campaigns, expand your reach through strategic partnerships, and implement advanced automation to maximize your ROI.',
-    hoverBullets: [
-      'Campaign scaling and automation',
-      'Advanced analytics and reporting',
-      'Strategic growth partnerships'
+    number: '03',
+    title: 'Scale & Amplify',
+    subtitle: 'Maximum Growth & Optimization',
+    description: 'Now we amplify what\'s working. We scale successful campaigns, expand your reach through strategic partnerships, and implement advanced automation to maximize your ROI.',
+    features: [
+      'Campaign scaling with advanced automation',
+      'Comprehensive analytics and reporting suite',
+      'Strategic partnerships and referral programs',
+      'Continuous optimization and growth hacking'
     ],
-    component: Phase3Scene
+    component: Phase3Scene,
+    color: '#8B9A9A'
   }
 ];
 
-function onTouchToggle(phaseId: string) {
-  if (activePhase === phaseId) {
-    activePhase = null;
-    return;
-  }
-  activePhase = phaseId;
+function selectPhase(index: number) {
+  if (isTransitioning || index === selectedPhase) return;
+  
+  isTransitioning = true;
+  selectedPhase = index;
+  
+  setTimeout(() => {
+    isTransitioning = false;
+  }, 600);
 }
 
-function handleKeyPress(event: KeyboardEvent, phaseId: string) {
+function handleKeyPress(event: KeyboardEvent, index: number) {
   if (event.key === 'Enter' || event.key === ' ') {
     event.preventDefault();
-    onTouchToggle(phaseId);
+    selectPhase(index);
   }
 }
 </script>
 
-<section class="w-full bg-gray-800 p-5 grid grid-rows-[25%_75%] lg:grid-cols-3 lg:grid-rows-none gap-5 min-h-screen box-border">
-  <!-- Main title spanning full width -->
-  <div class="lg:col-span-3 flex items-start">
-    <h2 class="font-syne text-6xl md:text-8xl lg:text-9xl font-normal text-gray-200 m-0 leading-tight">The Process</h2>
+<!-- Full-Screen Process Experience -->
+<section class="min-h-screen bg-[#2C2C2C] relative overflow-hidden">
+  
+  <!-- Background Elements -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-20 left-10 w-64 h-64 bg-[#7C9885]/5 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-80 h-80 bg-[#D4A574]/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#8B9A9A]/3 rounded-full blur-3xl"></div>
   </div>
 
-  <!-- Three phase cards in a row -->
-  {#each phases as phase, i}
-    <button
-      type="button"
-      class="border-0 bg-transparent rounded-lg p-2.5 grid grid-rows-[auto_1fr] gap-2.5 overflow-hidden relative cursor-pointer transition-all duration-300 ease-in-out w-full text-left hover:transform hover:-translate-y-1 hover:shadow-2xl focus:outline-none focus:ring-2 focus:ring-white/30 focus:transform focus:-translate-y-1 focus:shadow-2xl {hoveredPhase === phase.id || activePhase === phase.id ? 'transform -translate-y-1 shadow-2xl' : ''}"
-      on:mouseenter={() => (hoveredPhase = phase.id)}
-      on:mouseleave={() => (hoveredPhase = null)}
-      on:click={() => onTouchToggle(phase.id)}
-      on:keydown={(e) => handleKeyPress(e, phase.id)}
-      aria-expanded={hoveredPhase === phase.id || activePhase === phase.id}
-      aria-describedby="phase-content-{phase.id}"
-    >
-      <div class="p-2.5 bg-transparent relative z-10">
-        <h3 class="font-inter text-3xl md:text-4xl lg:text-5xl font-normal text-white m-0 mb-2.5 leading-tight">{phase.title}</h3>
-        <h4 class="font-inter text-3xl md:text-4xl lg:text-5xl font-normal text-white m-0 leading-tight">{phase.subtitle}</h4>
+  <div class="relative z-10 h-full">
+    
+    <!-- Section Header -->
+    <div class="pt-20 pb-16 px-6 text-center">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex items-center justify-center gap-4 mb-8">
+          <span class="h-px w-16 bg-gradient-to-r from-[#7C9885] to-transparent"></span>
+          <span class="font-inter text-sm font-medium text-[#7C9885] uppercase tracking-wider">Our Process</span>
+          <span class="h-px w-16 bg-gradient-to-l from-[#7C9885] to-transparent"></span>
+        </div>
+        
+        <h2 class="font-syne text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold text-white mb-6 leading-tight">
+          How We Build
+          <span class="block text-[#7C9885]">Your Success</span>
+        </h2>
+        
+        <p class="text-xl text-white/80 font-inter leading-relaxed max-w-3xl mx-auto">
+          Our proven three-phase methodology transforms your digital presence from foundation to scale, 
+          with full transparency every step of the way.
+        </p>
       </div>
+    </div>
 
-      <div class="bg-transparent flex items-center justify-center min-h-[200px] relative rounded-lg overflow-hidden">
-        <LazyThreeD>
-          <Static3DScene>
-            <svelte:component this={phase.component} />
-          </Static3DScene>
-        </LazyThreeD>
-
-        <!-- Hover indicator -->
-        {#if hoveredPhase !== phase.id && activePhase !== phase.id}
-          <div class="absolute bottom-4 right-4 flex items-center gap-2 px-3 py-2 bg-black/80 rounded-full text-white text-sm font-inter opacity-80 transition-opacity duration-300 pointer-events-none z-30" aria-hidden="true">
-            <span class="font-normal">Hover to explore</span>
-            <div class="text-base animate-bounce-x">⬅</div>
-          </div>
-        {/if}
-      </div>
-
-      <!-- Hover/expanded content -->
-      <div
-        id="phase-content-{phase.id}"
-        class="absolute inset-0 bg-gray-800/95 border border-white/15 z-40 flex items-center justify-center p-8 box-border opacity-0 transform translate-y-3 transition-all duration-450 ease-out text-white text-center rounded-lg shadow-lg {hoveredPhase === phase.id || activePhase === phase.id ? 'opacity-100 transform translate-y-0' : ''}"
-        aria-live="polite"
-      >
-        <div class="max-w-md">
-          <h3 class="m-0 mb-6 font-syne text-2xl md:text-3xl font-semibold tracking-tight leading-tight text-gray-200">{phase.hoverHeadline}</h3>
-          <p class="m-0 mb-6 font-inter text-sm md:text-base leading-relaxed font-normal opacity
--90">{phase.hoverDescription}</p>
-
-          <ul class="text-left m-0 pl-0 list-none font-inter">
-            {#each phase.hoverBullets as bullet}
-              <li class="my-3 pl-6 relative text-xs md:text-sm leading-snug font-normal before:content-['—'] before:absolute before:left-0 before:text-white/60 before:font-light">{bullet}</li>
+    <!-- Main Content Area -->
+    <div class="px-6 pb-20">
+      <div class="max-w-7xl mx-auto">
+        
+        <!-- Phase Navigation -->
+        <div class="flex justify-center mb-12">
+          <div class="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-2xl p-2 border border-white/10">
+            {#each phases as phase, i}
+              <button
+                class="px-6 py-3 rounded-xl font-inter font-medium text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-white/30 {
+                  selectedPhase === i 
+                    ? 'bg-white text-[#2C2C2C] shadow-lg' 
+                    : 'text-white/70 hover:text-white hover:bg-white/10'
+                }"
+                on:click={() => selectPhase(i)}
+                on:keydown={(e) => handleKeyPress(e, i)}
+                disabled={isTransitioning}
+              >
+                {phase.number} — {phase.title}
+              </button>
             {/each}
-          </ul>
+          </div>
+        </div>
+
+        <!-- Content Grid -->
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          
+          <!-- 3D Visualization - Full Size -->
+          <div class="order-2 lg:order-1">
+            <div class="relative aspect-square w-full max-w-2xl mx-auto">
+              
+              <!-- 3D Scene Container -->
+              <div class="absolute inset-0 rounded-3xl overflow-hidden bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/20 shadow-2xl">
+                <LazyThreeD>
+                  <Static3DScene width="100%" height="100%">
+                    <svelte:component this={phases[selectedPhase].component} />
+                  </Static3DScene>
+                </LazyThreeD>
+                
+                <!-- Phase Indicator -->
+                <div class="absolute top-6 left-6 z-20">
+                  <div class="flex items-center gap-3 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-full border border-white/20">
+                    <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: {phases[selectedPhase].color}"></div>
+                    <span class="text-white text-sm font-medium">Phase {phases[selectedPhase].number}</span>
+                  </div>
+                </div>
+                
+                <!-- Loading Indicator -->
+                {#if isTransitioning}
+                  <div class="absolute inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-30">
+                    <div class="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                  </div>
+                {/if}
+              </div>
+
+              <!-- Floating Enhancement Elements -->
+              <div class="absolute -top-4 -right-4 w-20 h-20 rounded-full blur-xl animate-pulse opacity-30"
+                   style="background: radial-gradient(circle, {phases[selectedPhase].color} 0%, transparent 70%);"></div>
+              <div class="absolute -bottom-4 -left-4 w-24 h-24 rounded-full blur-xl animate-pulse opacity-20"
+                   style="background: radial-gradient(circle, {phases[selectedPhase].color} 0%, transparent 70%); animation-delay: 1s;"></div>
+            </div>
+          </div>
+
+          <!-- Content Panel -->
+          <div class="order-1 lg:order-2 space-y-8">
+            
+            <!-- Phase Header -->
+            <div class="space-y-4">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl font-bold text-white border-2"
+                     style="background-color: {phases[selectedPhase].color}20; border-color: {phases[selectedPhase].color}">
+                  {phases[selectedPhase].number}
+                </div>
+                <div>
+                  <h3 class="font-syne text-3xl lg:text-4xl font-bold text-white leading-tight">
+                    {phases[selectedPhase].title}
+                  </h3>
+                  <p class="text-lg font-inter font-medium opacity-80" style="color: {phases[selectedPhase].color}">
+                    {phases[selectedPhase].subtitle}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="space-y-6">
+              <p class="text-lg lg:text-xl font-inter leading-relaxed text-white/90">
+                {phases[selectedPhase].description}
+              </p>
+            </div>
+
+            <!-- Features List -->
+            <div class="space-y-6">
+              <h4 class="font-syne text-xl font-semibold text-white flex items-center gap-3">
+                <span class="w-1 h-6 rounded-full" style="background-color: {phases[selectedPhase].color}"></span>
+                Key Deliverables
+              </h4>
+              
+              <div class="grid gap-4">
+                {#each phases[selectedPhase].features as feature, i}
+                  <div class="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
+                       style="animation: slideInUp 0.4s ease-out {i * 0.1}s both;">
+                    <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold text-white mt-0.5"
+                         style="background-color: {phases[selectedPhase].color}">
+                      ✓
+                    </div>
+                    <p class="text-white/80 font-inter leading-relaxed">{feature}</p>
+                  </div>
+                {/each}
+              </div>
+            </div>
+
+            <!-- Navigation Hint -->
+            <div class="pt-6">
+              <p class="text-sm text-white/60 font-inter flex items-center gap-2">
+                <span>Use the tabs above to explore each phase</span>
+                <span class="animate-pulse">👆</span>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </button>
-  {/each}
+    </div>
+  </div>
 </section>
 
 <style>
-@keyframes bounce-x {
-  0%, 100% { transform: translateX(0); }
-  50% { transform: translateX(-4px); }
-}
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-.animate-bounce-x {
-  animation: bounce-x 2s ease-in-out infinite;
-}
+  /* Smooth transitions */
+  button {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-/* Responsive - stack on mobile */
-@media (max-width: 1023px) {
-section {
-  grid-template-columns: 1fr;
-  grid-template-rows: auto auto auto auto;
-  gap: 15px;
-  padding: 15px;
-}
-}
+  /* Custom scrollbar for better UX */
+  section {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(124, 152, 133, 0.3) transparent;
+  }
 
-@media (max-width: 479px) {
-section {
-  padding: 10px;
-  gap: 10px;
-}
-}
+  section::-webkit-scrollbar {
+    width: 6px;
+  }
 
-/* Reduced motion support */
-@media (prefers-reduced-motion: reduce) {
-  button { transition: none; }
-  .transition-all { transition: none; }
-  .animate-bounce-x { animation: none; }
-}
+  section::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  section::-webkit-scrollbar-thumb {
+    background: rgba(124, 152, 133, 0.3);
+    border-radius: 3px;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation: none !important;
+      transition: none !important;
+    }
+  }
 </style>
+

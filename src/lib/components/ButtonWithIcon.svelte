@@ -6,18 +6,20 @@ import { onMount } from 'svelte';
     label?: string;
     ariaLabel?: string;
     disabled?: boolean;
+    size?: 'normal' | 'small';
+    onclick?: () => void;
   }
 
-  let { label = "Book a meeting", ariaLabel, disabled = false }: Props = $props();
+  let { label = "Book a meeting", ariaLabel, disabled = false, size = 'normal', onclick }: Props = $props();
 
   let iconActive = $state(false);
   let hoverTimeout: ReturnType<typeof setTimeout> | null = null;
-  let currentTheme = $state('dark'); // Default to dark since it's likely in hero section
+  let currentTheme = $state('dark'); // default to dark since it's in hero section
 
   const detectCurrentTheme = () => {
     const sections = document.querySelectorAll('section[data-theme]');
-    let foundTheme = 'dark'; // default theme for buttons
-    
+    let foundTheme = 'dark';
+
     for (const section of sections) {
       const rect = section.getBoundingClientRect();
       // Check if section is currently visible in viewport (particularly at the top)
@@ -26,7 +28,7 @@ import { onMount } from 'svelte';
         break;
       }
     }
-    
+
     currentTheme = foundTheme;
   };
 
@@ -81,6 +83,7 @@ import { onMount } from 'svelte';
   onpointerleave={handlePointerLeave}
   onfocusin={handlePointerEnter}
   onfocusout={() => { /* leave it to timeout */ }}
+  onclick={onclick}
   {disabled}
   aria-label={ariaLabel ?? label}
 >

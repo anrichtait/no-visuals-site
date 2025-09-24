@@ -2,36 +2,39 @@
   import { fly } from 'svelte/transition';
   import { X, Menu } from '$lib/icons';
   import { onMount } from 'svelte';
+  import { goto } from '$app/navigation';
   import ButtonWithIcon from './ButtonWithIcon.svelte';
 
   let drawerOpen = $state(false);
   let scrolled = $state(false);
   let logoHover = $state(false);
-  let currentTheme = $state('light'); // Track current section theme
+  let currentTheme = $state('light');
+
+  const handleBookCall = () => {
+    goto('contact_us');
+  };
 
   const links = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About Us' },
     { href: '/work', label: 'Our Work' },
-    { href: '/contact', label: 'Contact Us' }
+    { href: '/contact_us', label: 'Contact Us' }
   ];
 
   const detectCurrentTheme = () => {
-    // Don't detect theme while menu is open to avoid interference
     if (drawerOpen) return;
-    
+
     const sections = document.querySelectorAll('section[data-theme]');
-    let foundTheme = 'light'; // default theme
-    
+    let foundTheme = 'light';
+
     for (const section of sections) {
       const rect = section.getBoundingClientRect();
-      // Check if section is currently visible in viewport (particularly at the top)
       if (rect.top <= 100 && rect.bottom >= 0) {
         foundTheme = section.getAttribute('data-theme') || 'light';
         break;
       }
     }
-    
+
     currentTheme = foundTheme;
   };
 
@@ -40,7 +43,6 @@
     detectCurrentTheme();
   };
 
-  // Run theme detection on mount
   onMount(() => {
     detectCurrentTheme();
   });
@@ -67,26 +69,21 @@
     };
   });
 
-  // Compute colors based on current theme
   const textColorClass = $derived(currentTheme === 'dark' ? 'text-white' : 'text-gray-900');
   const hoverBgClass = $derived(currentTheme === 'dark' ? 'hover:bg-white/10' : 'hover:bg-slate-100');
   const focusRingClass = $derived(currentTheme === 'dark' ? 'focus:ring-white/30' : 'focus:ring-slate-300');
-  
-  // Border styles for hamburger menu (same as ButtonWithIcon)
+
   const borderColorClass = $derived(currentTheme === 'dark' ? 'border-white/30' : 'border-gray-900/30');
   const hoverBorderColorClass = $derived(currentTheme === 'dark' ? 'hover:border-white/50' : 'hover:border-gray-900/50');
 </script>
 
 <svelte:window on:scroll={handleScroll} on:keydown={handleKeydown} />
 
-<nav 
+<nav
   class="fixed top-0 left-0 w-full z-[60] transition-all duration-300 {scrolled ? 'bg-transparent backdrop-blur-md border-none border-gray-200/20 shadow-sm' : 'bg-transparent'} {textColorClass}"
-  role="navigation" 
   aria-label="Main navigation"
 >
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
-
+  <div class="relative flex items-center justify-between h-16 px-4 sm:px-6 lg:px-8">
             <a
                 href="/"
                 class="flex items-center z-30 group rounded-lg p-1 focus:outline-none focus:ring-2 focus:ring-offset-2 {focusRingClass}"
@@ -106,7 +103,6 @@
                 >
                     <title>Tait Media Solutions</title>
 
-                    <!-- Stroke path visible by default (uses currentColor) -->
                     <path
                         class="logo-path"
                         d="M14 16
@@ -127,7 +123,6 @@
                         stroke-linejoin="round"
                     />
 
-                    <!-- subtle interior accent -->
                     <path
                         class="logo-accent"
                         d="M30 30 L18 46 L18 58 Q18 58 22 60 H30 Z"
@@ -136,11 +131,10 @@
                     />
                 </svg>
             </a>
-            
-            <!-- Centered Mobile Menu Button -->
+
             <div class="absolute left-1/2 transform -translate-x-1/2 z-40">
                 <button
-                    class="p-2 rounded-lg border bg-transparent backdrop-blur-md focus:outline-none focus:ring-2 focus-visible:ring-4 transition-all duration-200 
+                    class="p-2 rounded-lg border bg-transparent backdrop-blur-md focus:outline-none focus:ring-2 focus-visible:ring-4 transition-all duration-200
                            {borderColorClass} {hoverBorderColorClass} {focusRingClass}"
                     on:click={() => (drawerOpen = !drawerOpen)}
                     aria-label={drawerOpen ? 'Close menu' : 'Open menu'}
@@ -154,17 +148,17 @@
                     {/if}
                 </button>
             </div>
-
-            <!-- Right Side: CTA Button -->
             <div class="flex items-center z-30">
-                <ButtonWithIcon label="Book a meeting" />
+                <div class="sm:hidden">
+                    <ButtonWithIcon label="Book" size="small" onclick={handleBookCall} />
+                </div>
+                <div class="hidden sm:block">
+                    <ButtonWithIcon label="Book a meeting" onclick={handleBookCall} />
+                </div>
             </div>
-        </div>
     </div>
 
-    <!-- Mobile Navigation Drawer -->
     {#if drawerOpen}
-        <!-- Full Screen Blur Background -->
         <div
             class="fixed inset-0 z-[100] backdrop-blur-md bg-black/20"
             on:click={closeDrawer}
@@ -173,7 +167,6 @@
             out:fly={{ y: 0, duration: 200, opacity: 0 }}
         ></div>
 
-        <!-- Mobile Menu Content -->
         <div
             id="mobile-menu"
             class="fixed left-0 right-0 top-16 z-[200]"
@@ -182,7 +175,7 @@
             role="menu"
             aria-label="Main full-width menu"
         >
-            <div class="bg-white/95 backdrop-blur-md shadow-lg">
+            <div class="backdrop-blur-md">
                 <div class="max-w-7xl mx-auto px-6 py-8">
                     <ul class="flex flex-col items-center space-y-8">
                         {#each links as link, index}

@@ -13,11 +13,9 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
 
 <main class="bg-[#F5F3F0] min-h-screen">
   
-  <!-- Hero Section -->
   <section class="pt-32 pb-16">
     <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Back Link -->
       <div class="mb-8">
         <a 
           href="/work"
@@ -30,7 +28,6 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
         </a>
       </div>
 
-      <!-- Header -->
       <div class="text-center mb-12">
         <div class="mb-6 flex items-center justify-center gap-4">
           <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium
@@ -56,7 +53,6 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
         </p>
       </div>
       
-      <!-- Hero Image -->
       <div class="relative rounded-2xl overflow-hidden shadow-xl mb-12">
         <div class="w-full aspect-[16/9] bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 flex items-center justify-center">
           <div class="text-center text-white/60">
@@ -67,7 +63,6 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
         <div class="absolute inset-0 bg-black/10"></div>
       </div>
 
-      <!-- Project Details -->
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
         <div class="text-center">
           <h3 class="font-semibold text-gray-900 mb-2">Client Type</h3>
@@ -87,7 +82,6 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
         </div>
       </div>
 
-      <!-- Tech Stack -->
       <div class="text-center mb-16">
         <h3 class="font-semibold text-gray-900 mb-4">Technology Stack</h3>
         <div class="flex flex-wrap justify-center gap-3">
@@ -103,11 +97,9 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
     </div>
   </section>
 
-  <!-- Content -->
   <section class="pb-20">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- The Challenge -->
       <article class="prose prose-xl prose-gray max-w-none mb-16">
         <h2 class="font-['Syne'] text-4xl font-semibold text-gray-900 mb-6 mt-12">The Complete Agency Transformation</h2>
         
@@ -313,7 +305,6 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
     </div>
   </section>
 
-  <!-- In Progress Notice -->
   <section class="py-16 bg-amber-50/30 backdrop-blur-sm border-t border-amber-200/30">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <div class="flex items-center justify-center gap-3 mb-4">
@@ -341,7 +332,6 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
     </div>
   </section>
 
-  <!-- CTA Section -->
   <section class="py-20 bg-white/30 backdrop-blur-sm border-t border-gray-200/50">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 class="font-['Syne'] text-4xl font-semibold text-gray-900 mb-6">

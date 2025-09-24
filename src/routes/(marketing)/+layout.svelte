@@ -10,7 +10,7 @@ import { Mail, ExternalLink } from '$lib/icons'
 
   let { children }: Props = $props()
 
-  const currentYear = new Date().getFullYear()
+  const currentYear = 2025;
 </script>
 
 <NavBar />

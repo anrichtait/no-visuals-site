@@ -5,14 +5,12 @@ import { ExternalLink, ArrowRight, CheckCircle, BarChart3, Zap } from '$lib/icon
 <section class="cta-section" data-theme="dark">
   <div class="cta-container">
 
-    <!-- Background elements -->
     <div class="background-elements">
       <div class="gradient-orb gradient-orb-1"></div>
       <div class="gradient-orb gradient-orb-2"></div>
       <div class="grid-pattern"></div>
     </div>
 
-    <!-- Main CTA Content -->
     <div class="content-wrapper">
       <div class="cta-header">
         <div class="header-accent">
@@ -31,7 +29,6 @@ import { ExternalLink, ArrowRight, CheckCircle, BarChart3, Zap } from '$lib/icon
           marketing that delivers qualified leads.
         </p>
 
-        <!-- Enhanced Primary CTA -->
         <div class="cta-button-wrapper">
           <a href="/contact_us" class="primary-cta-button">
             <span class="button-text">Start Your Project</span>
@@ -42,7 +39,6 @@ import { ExternalLink, ArrowRight, CheckCircle, BarChart3, Zap } from '$lib/icon
         </div>
       </div>
 
-      <!-- Enhanced Value Props with better visual hierarchy -->
       <div class="value-props-grid">
         <div class="value-prop-card">
           <div class="prop-icon">

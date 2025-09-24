@@ -157,7 +157,6 @@
         aria-hidden="true"
       />
 
-      <!-- Base content (always visible) -->
       <div class="service-base-content">
         <h2 class="title">{service.title}</h2>
         {#if service.subtitle}
@@ -165,7 +164,6 @@
         {/if}
       </div>
 
-      <!-- Hover/expanded content -->
       <div class="service-hover-content" aria-hidden={!(hoveredIndex === i || activeIndex === i)}>
         <div class="hover-inner">
           <h3 class="hover-headline">{service.headline ?? service.title}</h3>
@@ -190,7 +188,6 @@
   {/each}
 </section>
 
-<!-- Rest of your existing styles remain the same -->
 <style>
   :global(:root) {
     --transition: 450ms cubic-bezier(.2,.9,.2,1);

@@ -6,15 +6,15 @@ export let projects = [
     id: 'tait-media-rebrand',
     title: 'Tait Media Solutions',
     subtitle: 'Complete Agency Transformation',
-    description: 'A comprehensive documentation of rebuilding our own digital presence from the ground up. From outdated WordPress to cutting-edge Svelte 5, this case study will show the complete process of modernizing a marketing agency.',
+    description: 'A comprehensive documentation of rebuilding our own digital presence from the ground up. From an outdated Jekyll stack to cutting-edge Svelte, this case study will show the complete process of modernizing a marketing agency.',
     category: 'Agency Rebrand',
     status: 'in-progress',
-    expectedCompletion: 'Q1 2025',
+    expectedCompletion: 'Q4 2025',
     heroImage: '/images/case-studies/tait-rebrand-hero.jpg',
     heroImageAlt: 'Tait Media Solutions rebrand case study',
     link: '/work/tait-media-rebrand',
     previewFeatures: [
-      'Complete visual identity overhaul',
+      'Complete brand identity overhaul',
       'Svelte 5 + TypeScript architecture',
       'Custom 3D process visualization',
       'Performance optimization (98+ PageSpeed)',
@@ -33,7 +33,6 @@ $: hasMultipleProjects = projects.length > 1;
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 
-      <!-- Enhanced Section Header -->
       <div class="section-header">
         <div class="header-accent">
           <span class="accent-line"></span>
@@ -44,10 +43,8 @@ $: hasMultipleProjects = projects.length > 1;
           of our own agency - from outdated systems to cutting-edge digital architecture.</p>
       </div>
 
-    <!-- Magazine Cover -->
     <div class="relative rounded-2xl overflow-hidden bg-white/10 backdrop-blur-sm border border-white/20 shadow-xl">
 
-      <!-- Project Display - 80vh for magazine feel -->
       <div class="relative overflow-hidden" style="height: 80vh; min-height: 600px;">
 
         {#each projects as project, index}
@@ -56,7 +53,6 @@ $: hasMultipleProjects = projects.length > 1;
             class:pointer-events-none={index !== currentIndex}
           >
 
-            <!-- Hero Image / Background -->
             {#if project.heroImage && project.status === 'published'}
               <img
                 src={project.heroImage}
@@ -65,9 +61,7 @@ $: hasMultipleProjects = projects.length > 1;
                 loading="lazy"
               />
             {:else}
-              <!-- Background Pattern for Coming Soon / In Progress -->
               <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-                <!-- Animated Grid Pattern -->
                 <div class="absolute inset-0 opacity-10">
                   <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
                     <defs>
@@ -79,7 +73,6 @@ $: hasMultipleProjects = projects.length > 1;
                   </svg>
                 </div>
 
-                <!-- Floating Elements -->
                 <div class="absolute inset-0 overflow-hidden">
                   <div class="absolute top-20 left-20 w-32 h-32 rounded-full bg-white/5 blur-xl animate-pulse-slow"></div>
                   <div class="absolute bottom-32 right-32 w-24 h-24 rounded-full bg-white/5 blur-lg animate-pulse-slow" style="animation-delay: 1s;"></div>
@@ -88,14 +81,11 @@ $: hasMultipleProjects = projects.length > 1;
               </div>
             {/if}
 
-            <!-- Gradient Overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
-            <!-- Magazine Cover Content -->
             <div class="absolute inset-0 flex flex-col justify-end p-8 md:p-12 lg:p-16">
               <div class="max-w-3xl">
 
-                <!-- Status & Category Badges -->
                 <div class="mb-6 flex items-center gap-3">
                   {#if project.status === 'in-progress'}
                     <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
@@ -116,20 +106,17 @@ $: hasMultipleProjects = projects.length > 1;
                   </span>
                 </div>
 
-                <!-- Magazine Title & Subtitle -->
-                <h3 class="font-syne text-[clamp(3rem,6vw,5rem)] font-bold text-white leading-[0.85] mb-6">
+                <h3 class="text-[clamp(3rem,6vw,5rem)] magazine-title text-white leading-[0.85] mb-6">
                   {project.title}
                 </h3>
                 <h4 class="font-inter text-[clamp(1.5rem,3.5vw,2.25rem)] font-light text-white/95 mb-8 leading-tight">
                   {project.subtitle}
                 </h4>
 
-                <!-- Description -->
                 <p class="text-white/85 text-xl leading-relaxed mb-10 max-w-2xl font-light">
                   {project.description}
                 </p>
 
-                <!-- Preview Features -->
                 {#if project.previewFeatures}
                   <div class="mb-10">
                     <h5 class="text-white font-semibold mb-4 flex items-center gap-2 text-lg">
@@ -147,7 +134,6 @@ $: hasMultipleProjects = projects.length > 1;
                   </div>
                 {/if}
 
-                <!-- Tech Stack -->
                 {#if project.techStack}
                   <div class="flex flex-wrap gap-3 mb-10">
                     {#each project.techStack as tech}
@@ -159,7 +145,6 @@ $: hasMultipleProjects = projects.length > 1;
                   </div>
                 {/if}
 
-                <!-- CTA Button -->
                 <div class="flex items-center gap-6">
                   {#if project.status === 'published'}
                     <a
@@ -200,7 +185,6 @@ $: hasMultipleProjects = projects.length > 1;
               </div>
             </div>
 
-            <!-- Corner Badge -->
             <div class="absolute top-8 right-8">
               <div class="px-5 py-3 rounded-xl bg-white/20 backdrop-blur-md border border-white/30">
                 <span class="text-white font-semibold">
@@ -217,10 +201,8 @@ $: hasMultipleProjects = projects.length > 1;
 
     </div>
 
-    <!-- Bottom Section -->
     <div class="flex items-center justify-between mt-8">
 
-      <!-- Work in Progress Status -->
       <div class="text-gray-600">
         <div class="flex items-center gap-3 mb-2">
           <div class="w-8 h-8 rounded-full bg-amber-400 flex items-center justify-center">
@@ -233,11 +215,10 @@ $: hasMultipleProjects = projects.length > 1;
         </p>
       </div>
 
-      <!-- Newsletter/Contact -->
       <div class="text-right">
         <p class="text-gray-700 font-medium mb-2">Get notified when it's ready</p>
         <a
-          href="/contact_us"
+          href="/newsletter-signup"
           class="inline-flex items-center gap-2 px-5 py-2 rounded-xl
                  bg-white/50 backdrop-blur-sm border border-gray-900/20 text-gray-900
                  hover:bg-white/70 hover:border-gray-900/30 hover:scale-105
@@ -283,6 +264,11 @@ $: hasMultipleProjects = projects.length > 1;
   letter-spacing: 0.1em;
 }
 
+.magazine-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
 .section-title {
   font-family: 'Syne', sans-serif;
   font-size: clamp(4rem, 10vw, 8rem);

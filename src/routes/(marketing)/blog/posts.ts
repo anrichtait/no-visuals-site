@@ -1,6 +1,6 @@
 export const blogInfo = {
-  name: "SaaS Starter Blog",
-  description: "A sample blog",
+  name: "No Visuals Weekly",
+  description: "Get weekly insights on web design that converts. Join other business owners who are turning their websites into lead-generating machines.",
 }
 
 export type BlogPost = {
@@ -11,26 +11,12 @@ export type BlogPost = {
   parsedDate?: Date // Optional because it's added dynamically
 }
 
-// Update this list with the actual blog post list
-// Create a page in the "(posts)" directory for each entry
 const blogPosts: BlogPost[] = [
   {
-    title: "How we built a beautiful 41kb SaaS website with this template",
-    description: "How to use this template you to bootstrap your own site.",
-    link: "/blog/how_we_built_our_41kb_saas_website",
-    date: "2024-03-10",
-  },
-  {
-    title: "Example Blog Post 2",
-    description: "Even more example content!",
-    link: "/blog/awesome_post",
-    date: "2022-9-23",
-  },
-  {
-    title: "Example Blog Post",
-    description: "A sample blog post, showing our blog engine",
-    link: "/blog/example_blog_post",
-    date: "2023-03-13",
+    title: "Why I Migrated Our Agency to SvelteKit & Rust",
+    description: "As a web developer and agency owner, I made the difficult choice to switch our tech stack from Jekyll to SvelteKit with a touch of Rust—here’s why it was worth it.",
+    link: "/blog/why_i_migrated_our_agency_to_svelte",
+    date: "2025-11-11",
   },
 ]
 

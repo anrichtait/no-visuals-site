@@ -116,9 +116,6 @@
   }
 
   .hero-heading {
-    font-family: 'Syne', sans-serif;
-    font-weight: 400;
-    font-display: swap;
     font-size: clamp(3rem, 10vw, 12rem);
     line-height: 0.7;
     letter-spacing: -0.05em;

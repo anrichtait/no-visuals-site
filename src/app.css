@@ -149,3 +149,32 @@ button[disabled].authBtn::before { font-size: 14px; content: "Loading..."; color
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+
+h1, h2, h3, h4, h5, h6,
+.heading, .title, .section-title, .hero-heading, .magazine-title,
+.cta-title, .hover-headline {
+  font-family: 'Syne', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.heading-primary {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+
+/* Prevent font swap flash by using font-display: optional */
+.hero-heading {
+  font-family: 'Syne', system-ui, -apple-system, sans-serif;
+  font-weight: 700;
+  font-display: optional; /* If font isn't ready quickly, stick with fallback */
+}
+
+/* Ensure fallback fonts are sized similarly to Syne */
+@font-face {
+  font-family: 'Syne';
+  font-display: optional;
+  size-adjust: 100%;
+}

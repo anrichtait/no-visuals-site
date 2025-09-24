@@ -147,7 +147,6 @@ function getStatusBadge(study: CaseStudy) {
 <main class="bg-[#F5F3F0] min-h-screen pt-32 pb-20" data-theme="light">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
-    <!-- Header -->
     <div class="text-center mb-16">
       <h1 class="font-['Syne'] text-[clamp(4rem,10vw,8rem)] font-normal text-gray-900 leading-[1.1] mb-6">
         Our Work
@@ -157,7 +156,6 @@ function getStatusBadge(study: CaseStudy) {
         firms transform their digital presence and drive measurable growth.
       </p>
       
-      <!-- Stats -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
         <div class="text-center">
           <div class="text-3xl font-bold text-gray-900">340%+</div>
@@ -174,10 +172,8 @@ function getStatusBadge(study: CaseStudy) {
       </div>
     </div>
 
-    <!-- Filters -->
     <div class="flex flex-col sm:flex-row items-center justify-between gap-6 mb-12">
       
-      <!-- Category Filter -->
       <div class="flex items-center gap-4">
         <span class="text-gray-700 font-medium">Filter:</span>
         <div class="flex flex-wrap gap-2">
@@ -196,7 +192,6 @@ function getStatusBadge(study: CaseStudy) {
         </div>
       </div>
 
-      <!-- Sort -->
       <div class="flex items-center gap-4">
         <span class="text-gray-700 font-medium">Sort:</span>
         <select
@@ -211,7 +206,6 @@ function getStatusBadge(study: CaseStudy) {
 
     </div>
 
-    <!-- Case Studies Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
       {#each filteredAndSortedStudies() as study}
         {@const statusBadge = getStatusBadge(study)}
@@ -219,7 +213,6 @@ function getStatusBadge(study: CaseStudy) {
         <article class="group relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl overflow-hidden
                        hover:scale-[1.02] hover:shadow-xl transition-all duration-300">
           
-          <!-- Image -->
           <div class="relative aspect-[16/10] overflow-hidden">
             <img 
               src={study.heroImage}
@@ -227,10 +220,8 @@ function getStatusBadge(study: CaseStudy) {
               class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
             />
             
-            <!-- Gradient overlay -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
             
-            <!-- Status badge -->
             <div class="absolute top-4 left-4">
               <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium
                            backdrop-blur-md border {statusBadge.class}">
@@ -239,7 +230,6 @@ function getStatusBadge(study: CaseStudy) {
               </span>
             </div>
             
-            <!-- Category badge -->
             <div class="absolute top-4 right-4">
               <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
                            bg-white/20 backdrop-blur-md border border-white/30 text-white">
@@ -248,10 +238,8 @@ function getStatusBadge(study: CaseStudy) {
             </div>
           </div>
 
-          <!-- Content -->
           <div class="p-6 lg:p-8">
             
-            <!-- Title & Subtitle -->
             <h2 class="font-['Syne'] text-2xl lg:text-3xl font-semibold text-gray-900 leading-tight mb-3">
               {study.title}
             </h2>
@@ -259,12 +247,10 @@ function getStatusBadge(study: CaseStudy) {
               {study.subtitle}
             </h3>
             
-            <!-- Description -->
             <p class="text-gray-700 leading-relaxed mb-6 line-clamp-3">
               {study.description}
             </p>
             
-            <!-- Key Results/Features -->
             <div class="mb-6">
               <h4 class="text-sm font-semibold text-gray-900 mb-3 uppercase tracking-wide">
                 {study.status === 'published' ? 'Key Results' : 'What We\'ll Cover'}
@@ -279,7 +265,6 @@ function getStatusBadge(study: CaseStudy) {
               </div>
             </div>
             
-            <!-- Meta info -->
             <div class="flex items-center justify-between text-sm text-gray-500 mb-6">
               <span>{study.clientType}</span>
               <span>{study.projectDuration}</span>
@@ -288,7 +273,6 @@ function getStatusBadge(study: CaseStudy) {
               </span>
             </div>
             
-            <!-- Tech stack -->
             <div class="flex flex-wrap gap-2 mb-6">
               {#each study.techStack.slice(0, 4) as tech}
                 <span class="px-2 py-1 rounded text-xs font-medium
@@ -303,7 +287,6 @@ function getStatusBadge(study: CaseStudy) {
               {/if}
             </div>
             
-            <!-- CTA -->
             <div class="flex items-center justify-between">
               {#if study.status === 'published'}
                 <a 
@@ -342,7 +325,6 @@ function getStatusBadge(study: CaseStudy) {
       {/each}
     </div>
 
-    <!-- Bottom CTA -->
     <div class="text-center bg-white/30 backdrop-blur-sm border border-white/40 rounded-2xl p-12">
       <h2 class="font-['Syne'] text-3xl lg:text-4xl font-semibold text-gray-900 mb-6">
         Ready to Transform Your Digital Presence?
