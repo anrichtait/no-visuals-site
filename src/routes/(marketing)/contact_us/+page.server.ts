@@ -1,9 +1,8 @@
 import { fail } from "@sveltejs/kit"
 import { sendAdminEmail } from "$lib/mailer.js"
 
-/** @type {import('./$types').Actions} */
 export const actions = {
-  submitContactUs: async ({ request, locals: { supabaseServiceRole } }) => {
+  submitContactUs: async ({ request, locals: { supabaseServiceRole }, getClientAddress }) => {
     const formData = await request.formData()
     const errors: { [fieldName: string]: string } = {}
 
@@ -11,68 +10,71 @@ export const actions = {
     if (firstName.length < 2) {
       errors["first_name"] = "First name is required"
     }
-    if (firstName.length > 500) {
-      errors["first_name"] = "First name too long"
-    }
 
     const lastName = formData.get("last_name")?.toString() ?? ""
     if (lastName.length < 2) {
       errors["last_name"] = "Last name is required"
     }
-    if (lastName.length > 500) {
-      errors["last_name"] = "Last name too long"
-    }
 
     const email = formData.get("email")?.toString() ?? ""
-    if (email.length < 6) {
-      errors["email"] = "Email is required"
-    } else if (email.length > 500) {
-      errors["email"] = "Email too long"
-    } else if (!email.includes("@") || !email.includes(".")) {
-      errors["email"] = "Invalid email"
+    if (email.length < 6 || !email.includes("@")) {
+      errors["email"] = "Valid email is required"
     }
 
-    const company = formData.get("company")?.toString() ?? ""
-    if (company.length > 500) {
-      errors["company"] = "Company too long"
-    }
-
+    const companyName = formData.get("company_name")?.toString() ?? ""
     const phone = formData.get("phone")?.toString() ?? ""
-    if (phone.length > 100) {
-      errors["phone"] = "Phone number too long"
-    }
-
     const message = formData.get("message")?.toString() ?? ""
-    if (message.length > 2000) {
-      errors["message"] = "Message too long (" + message.length + " of 2000)"
+
+    if (message.length < 10) {
+      errors["message"] = "Please provide more details about your project"
     }
 
     if (Object.keys(errors).length > 0) {
       return fail(400, { errors })
     }
 
-    // Save to database
+    // Get user's IP and user agent for tracking
+    const userAgent = request.headers.get("user-agent")
+    const ipAddress = getClientAddress()
+
+    // Save to database with enhanced tracking
     const { error: insertError } = await supabaseServiceRole
-      .from("contact_requests")
+      .from("contact_submissions")
       .insert({
         first_name: firstName,
         last_name: lastName,
         email,
-        company_name: company,
+        company_name: companyName,
         phone,
-        message_body: message,
-        updated_at: new Date(),
+        message,
+        source: 'website',
+        user_agent: userAgent,
+        ip_address: ipAddress,
+        status: 'new'
       })
 
     if (insertError) {
       console.error("Error saving contact request", insertError)
-      return fail(500, { errors: { _: "Error saving" } })
+      return fail(500, { errors: { _: "Error saving request. Please try again." } })
     }
 
-    // Send email to admin
+    // Send admin notification
     await sendAdminEmail({
       subject: "New contact request",
-      body: `New contact request from ${firstName} ${lastName}.\n\nEmail: ${email}\n\nPhone: ${phone}\n\nCompany: ${company}\n\nMessage: ${message}`,
+      body: `New contact request from ${firstName} ${lastName}
+
+Email: ${email}
+Phone: ${phone}
+Company: ${companyName}
+
+Message:
+${message}
+
+Source: Website Contact Form
+User Agent: ${userAgent}
+IP: ${ipAddress}`
     })
-  },
+
+    return { success: true }
+  }
 }

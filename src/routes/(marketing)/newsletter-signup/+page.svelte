@@ -10,7 +10,7 @@
 
   const benefits = [
     "Weekly insights on web design and marketing that converts",
-    "Behind-the-scenes case studies from real projects", 
+    "Behind-the-scenes case studies from real projects",
     "Data-driven strategies that actually work",
     "No fluff, just actionable advice you can use"
   ]
@@ -41,7 +41,7 @@
 
 <section class="mx-auto max-w-4xl px-6 py-20 lg:py-28">
   <div class="text-center space-y-12">
-    
+
     <!-- Header Section -->
     <div class="space-y-8">
       <div class="flex items-center justify-center gap-4">
@@ -49,12 +49,12 @@
         <span class="font-inter text-sm font-medium text-[#7C9885] uppercase tracking-wider">Newsletter</span>
         <span class="h-px w-12 bg-gradient-to-r from-[#7C9885] via-transparent to-transparent"></span>
       </div>
-      
+
       <h1 class="font-syne font-bold text-5xl lg:text-6xl xl:text-7xl leading-[0.9] tracking-tight text-[#2C2C2C]">
         <span class="block">The No Visuals</span>
         <span class="block text-[#7C9885]">Weekly</span>
       </h1>
-      
+
       <p class="text-xl lg:text-2xl font-inter leading-relaxed text-[#2C2C2C] font-light max-w-2xl mx-auto">
         Get weekly insights on web design that converts. Join other business owners who are turning their websites into lead-generating machines.
       </p>
@@ -82,7 +82,7 @@
       <!-- Signup Form -->
       <div class="max-w-md mx-auto">
         <div class="relative bg-gradient-to-br from-white via-white to-gray-50 rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden">
-          
+
           <!-- Form Header -->
           <div class="px-8 py-6 bg-gradient-to-r from-[#2C2C2C] to-[#3C3C3C] text-white text-center">
             <div class="space-y-2">
@@ -135,7 +135,7 @@
               {/if}
 
               <!-- Submit Button -->
-              <button 
+              <button
                 type="submit"
                 disabled={loading}
                 class="w-full bg-[#7C9885] hover:bg-[#6B8574] disabled:bg-[#7C9885]/50 text-white font-syne font-semibold py-4 px-6 rounded-lg transition-all duration-200 flex items-center justify-center gap-2 {loading ? 'cursor-not-allowed' : 'hover:shadow-lg hover:scale-[1.02]'}"
@@ -160,7 +160,7 @@
 
     <div class="max-w-2xl mx-auto space-y-8 pt-12">
       <h3 class="font-syne text-2xl font-semibold text-[#2C2C2C] text-center">What you'll get:</h3>
-      
+
       <div class="grid grid-cols-1 gap-4">
         {#each benefits as benefit}
           <div class="flex items-start gap-4 p-4 rounded-xl bg-white/60 border border-white/80 hover:bg-white/80 hover:border-[#7C9885]/20 transition-all duration-300">
@@ -188,17 +188,11 @@
           <span class="font-inter text-sm">Weekly on Thursday</span>
         </div>
       </div>
-      
+
       <p class="text-xs text-[#2C2C2C]/50 leading-relaxed">
-        No spam, no sales pitches. Just actionable insights delivered to your inbox every Thursday. 
+        No spam, no sales pitches. Just actionable insights delivered to your inbox every Thursday.
         Unsubscribe with one click anytime.
       </p>
     </div>
   </div>
 </section>
-
-<style>
-  .group {
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-</style>

@@ -9,99 +9,222 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      contact_requests: {
+      profiles: {
         Row: {
-          company_name: string | null
-          email: string | null
-          first_name: string | null
           id: string
-          last_name: string | null
-          message_body: string | null
-          phone: string | null
-          updated_at: Date | null
+          created_at: string
+          updated_at: string
+          email: string | null
+          full_name: string | null
+          avatar_url: string | null
+          role: string
+          is_active: boolean
+          newsletter_subscribed: boolean
+          newsletter_subscribed_at: string | null
+          newsletter_unsubscribed_at: string | null
         }
         Insert: {
-          company_name?: string | null
+          id: string
+          created_at?: string
+          updated_at?: string
           email?: string | null
-          first_name?: string | null
-          id?: string
-          last_name?: string | null
-          message_body?: string | null
-          phone?: string | null
-          updated_at?: Date | null
+          full_name?: string | null
+          avatar_url?: string | null
+          role?: string
+          is_active?: boolean
+          newsletter_subscribed?: boolean
+          newsletter_subscribed_at?: string | null
+          newsletter_unsubscribed_at?: string | null
         }
         Update: {
-          company_name?: string | null
-          email?: string | null
-          first_name?: string | null
           id?: string
-          last_name?: string | null
-          message_body?: string | null
-          phone?: string | null
-          updated_at?: Date | null
+          created_at?: string
+          updated_at?: string
+          email?: string | null
+          full_name?: string | null
+          avatar_url?: string | null
+          role?: string
+          is_active?: boolean
+          newsletter_subscribed?: boolean
+          newsletter_subscribed_at?: string | null
+          newsletter_unsubscribed_at?: string | null
         }
         Relationships: []
       }
-      profiles: {
+      contact_submissions: {
         Row: {
-          avatar_url: string | null
-          full_name: string | null
           id: string
-          updated_at: string | null
+          created_at: string
+          first_name: string
+          last_name: string
+          email: string
+          phone: string | null
           company_name: string | null
-          website: string | null
-          unsubscribed: boolean
+          message: string
+          source: string
+          user_agent: string | null
+          ip_address: string | null
+          status: string
+          notes: string | null
+          assigned_to: string | null
+          contacted_at: string | null
+          follow_up_at: string | null
         }
         Insert: {
-          avatar_url?: string | null
-          full_name?: string | null
-          id: string
-          updated_at?: Date | null
+          id?: string
+          created_at?: string
+          first_name: string
+          last_name: string
+          email: string
+          phone?: string | null
           company_name?: string | null
-          website?: string | null
-          unsubscribed: boolean
+          message: string
+          source?: string
+          user_agent?: string | null
+          ip_address?: string | null
+          status?: string
+          notes?: string | null
+          assigned_to?: string | null
+          contacted_at?: string | null
+          follow_up_at?: string | null
         }
         Update: {
-          avatar_url?: string | null
-          full_name?: string | null
           id?: string
-          updated_at?: string | null
+          created_at?: string
+          first_name?: string
+          last_name?: string
+          email?: string
+          phone?: string | null
           company_name?: string | null
-          website?: string | null
-          unsubscribed: boolean
+          message?: string
+          source?: string
+          user_agent?: string | null
+          ip_address?: string | null
+          status?: string
+          notes?: string | null
+          assigned_to?: string | null
+          contacted_at?: string | null
+          follow_up_at?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "profiles_id_fkey"
-            columns: ["id"]
-            referencedRelation: "users"
+            foreignKeyName: "contact_submissions_assigned_to_fkey"
+            columns: ["assigned_to"]
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
-          },
+          }
         ]
       }
-      stripe_customers: {
+      newsletter_subscribers: {
         Row: {
-          stripe_customer_id: string
-          updated_at: Date | null
-          user_id: string
+          id: string
+          created_at: string
+          updated_at: string
+          email: string
+          source: string
+          subscribed_at: string | null
+          unsubscribed_at: string | null
+          is_active: boolean
+          first_name: string | null
+          last_name: string | null
+          user_agent: string | null
+          ip_address: string | null
+          referrer: string | null
         }
         Insert: {
-          stripe_customer_id: string
-          updated_at?: Date | null
-          user_id: string
+          id?: string
+          created_at?: string
+          updated_at?: string
+          email: string
+          source?: string
+          subscribed_at?: string | null
+          unsubscribed_at?: string | null
+          is_active?: boolean
+          first_name?: string | null
+          last_name?: string | null
+          user_agent?: string | null
+          ip_address?: string | null
+          referrer?: string | null
         }
         Update: {
-          stripe_customer_id?: string
-          updated_at?: Date | null
-          user_id?: string
+          id?: string
+          created_at?: string
+          updated_at?: string
+          email?: string
+          source?: string
+          subscribed_at?: string | null
+          unsubscribed_at?: string | null
+          is_active?: boolean
+          first_name?: string | null
+          last_name?: string | null
+          user_agent?: string | null
+          ip_address?: string | null
+          referrer?: string | null
+        }
+        Relationships: []
+      }
+      analytics_events: {
+        Row: {
+          id: string
+          created_at: string
+          event_type: string
+          event_name: string | null
+          page_url: string | null
+          page_title: string | null
+          referrer: string | null
+          session_id: string | null
+          user_id: string | null
+          anonymous_id: string | null
+          user_agent: string | null
+          ip_address: string | null
+          country: string | null
+          city: string | null
+          properties: Json
+          page_load_time: number | null
+        }
+        Insert: {
+          id?: string
+          created_at?: string
+          event_type: string
+          event_name?: string | null
+          page_url?: string | null
+          page_title?: string | null
+          referrer?: string | null
+          session_id?: string | null
+          user_id?: string | null
+          anonymous_id?: string | null
+          user_agent?: string | null
+          ip_address?: string | null
+          country?: string | null
+          city?: string | null
+          properties?: Json
+          page_load_time?: number | null
+        }
+        Update: {
+          id?: string
+          created_at?: string
+          event_type?: string
+          event_name?: string | null
+          page_url?: string | null
+          page_title?: string | null
+          referrer?: string | null
+          session_id?: string | null
+          user_id?: string | null
+          anonymous_id?: string | null
+          user_agent?: string | null
+          ip_address?: string | null
+          country?: string | null
+          city?: string | null
+          properties?: Json
+          page_load_time?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "stripe_customers_user_id_fkey"
+            foreignKeyName: "analytics_events_user_id_fkey"
             columns: ["user_id"]
-            referencedRelation: "users"
+            referencedRelation: "profiles"
             referencedColumns: ["id"]
-          },
+          }
         ]
       }
     }
