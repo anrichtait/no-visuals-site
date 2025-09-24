@@ -6,16 +6,13 @@
   let visible = $state(false);
   let isLive = $state(false);
 
-  // Animation counters for the metrics
   let accuracy = $state(0);
   let eventsPerHour = $state(0);
   let monthlyROI = $state(0);
 
-  // Session info
   let sessionStart = new Date();
   let activeUsers = $state(3);
 
-  // Activity feed
   let activities = $state([
     { event: "Lead qualification completed", time: "2m ago", type: "lead", color: "text-[#7C9885]" },
     { event: "High-intent page view tracked", time: "5m ago", type: "view", color: "text-blue-500" },
@@ -47,7 +44,6 @@
         if (e.isIntersecting) {
           visible = true;
           
-          // Animate counters when visible
           setTimeout(() => {
             const animateCounter = (target: number, setter: (val: number) => void, duration = 2000) => {
               let start = 0;
@@ -63,12 +59,10 @@
               }, 16);
             };
 
-            // Realistic but impressive starting values
             animateCounter(97.8, (val) => accuracy = val);
             animateCounter(200, (val) => eventsPerHour = val);
             animateCounter(1000, (val) => monthlyROI = val);
 
-            // Start live updates after initial animation
             setTimeout(() => {
               isLive = true;
               startLiveUpdates();
@@ -83,26 +77,20 @@
   });
 
   function startLiveUpdates() {
-    // Subtle metric fluctuations
     setInterval(() => {
       if (isLive) {
-        // Accuracy fluctuates subtly (97.2% - 98.9%)
         accuracy = 97.2 + Math.random() * 1.7;
         
-        // Events per hour grows slowly
         eventsPerHour = eventsPerHour + Math.floor(Math.random() * 25);
         
-        // Monthly ROI occasionally increments
         if (Math.random() > 0.7) {
           monthlyROI = monthlyROI + Math.floor(Math.random() * 100);
         }
 
-        // Active users fluctuates slightly
         activeUsers = 10 + Math.floor(Math.random() * 8);
       }
     }, 4000 + Math.random() * 3000);
 
-    // Update activity feed
     setInterval(() => {
       if (isLive) {
         const newActivity = activityTypes[Math.floor(Math.random() * activityTypes.length)];
@@ -123,12 +111,12 @@
     {
       icon: BarChart3,
       title: "Real-Time Tracking",
-      description: "Live dashboard updates every visitor interaction"
+      description: "Live marketing and analytics dashboard"
     },
     {
       icon: TrendingUp,
       title: "Actionable Insights",
-      description: "Clear ROI metrics that drive business decisions"
+      description: "Clear metrics that drive business decisions"
     },
     {
       icon: Zap,
@@ -144,14 +132,11 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
         
-        <!-- Premium Data Visualization - Left Side -->
         <div class="flex items-center justify-center order-2 lg:order-1">
             <div class="relative w-full max-w-lg">
                 
-                <!-- Main Dashboard Container -->
                 <div class="relative bg-gradient-to-br from-white via-white to-gray-50 rounded-2xl shadow-2xl border border-gray-200/50 overflow-hidden">
                     
-                    <!-- Dashboard Header -->
                     <div class="px-6 py-4 bg-gradient-to-r from-[#2C2C2C] to-[#3C3C3C] text-white">
                         <div class="flex items-center justify-between">
                             <div class="flex items-center gap-3">
@@ -165,10 +150,8 @@
                         </div>
                     </div>
 
-                    <!-- Analytics Content -->
                     <div class="p-6 space-y-6">
                         
-                        <!-- Key Metrics Row -->
                         <div class="grid grid-cols-3 gap-4">
                             <div class="text-center p-3 bg-gradient-to-br from-[#7C9885]/5 to-[#7C9885]/10 rounded-xl border border-[#7C9885]/20">
                                 <div class="text-2xl font-bold text-[#2C2C2C] mb-1">{accuracy.toFixed(1)}%</div>
@@ -184,13 +167,10 @@
                             </div>
                         </div>
 
-                        <!-- Chart Visualization -->
                         <div class="relative h-32 bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-200/80 p-4 overflow-hidden">
                             
-                            <!-- Animated Chart Lines -->
                             <div class="absolute inset-4">
                                 <svg class="w-full h-full" viewBox="0 0 200 80">
-                                    <!-- Grid lines -->
                                     <defs>
                                         <pattern id="grid" width="20" height="16" patternUnits="userSpaceOnUse">
                                             <path d="M 20 0 L 0 0 0 16" fill="none" stroke="#f3f4f6" stroke-width="0.5"/>
@@ -198,7 +178,6 @@
                                     </defs>
                                     <rect width="200" height="80" fill="url(#grid)" />
                                     
-                                    <!-- Data lines -->
                                     <path d="M10,60 Q50,45 90,35 T170,25" 
                                           fill="none" 
                                           stroke="#7C9885" 
@@ -213,7 +192,6 @@
                                           opacity="0.6"
                                           class={visible ? "animate-draw-line-delayed" : "opacity-0"} />
                                     
-                                    <!-- Data points -->
                                     {#if visible}
                                         <circle cx="170" cy="25" r="3" fill="#7C9885" class="animate-pulse-dot">
                                             <animate attributeName="r" values="3;5;3" dur="2s" repeatCount="indefinite"/>
@@ -225,12 +203,10 @@
                                 </svg>
                             </div>
                             
-                            <!-- Chart Labels -->
                             <div class="absolute bottom-1 left-4 text-xs text-gray-500">Conversion Rate</div>
                             <div class="absolute top-1 right-4 text-xs text-[#7C9885] font-medium">↗ 12%</div>
                         </div>
 
-                        <!-- Recent Activity -->
                         <div class="space-y-3">
                             <h4 class="text-sm font-medium text-gray-700 flex items-center gap-2">
                                 <div class="w-1.5 h-1.5 rounded-full bg-[#7C9885]"></div>

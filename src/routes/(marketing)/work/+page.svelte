@@ -19,16 +19,15 @@ interface CaseStudy {
   projectDuration: string;
 }
 
-// Case studies data - this could be loaded from a CMS or API
 const caseStudies: CaseStudy[] = [
   {
     id: 'tait-media-rebrand',
     title: 'Tait Media Solutions',
     subtitle: 'Complete Agency Transformation',
-    description: 'A comprehensive documentation of rebuilding our own digital presence from the ground up. From outdated WordPress to cutting-edge Svelte 5, this case study will show the complete process of modernizing a marketing agency.',
+    description: 'A comprehensive documentation of rebuilding our own digital presence from the ground up. From an outdated Jekyll stack to cutting-edge Svelte 5, this case study will show the complete process of modernizing a marketing agency.',
     category: 'Agency Rebrand',
     status: 'in-progress',
-    expectedCompletion: 'Q1 2025',
+    expectedCompletion: 'Q4 2025',
     heroImage: '/images/case-studies/tait-rebrand-hero.jpg',
     heroImageAlt: 'Tait Media Solutions rebrand case study',
     link: '/work/tait-media-rebrand',
@@ -43,53 +42,8 @@ const caseStudies: CaseStudy[] = [
     clientType: 'Agency',
     projectDuration: '3 months'
   },
-  {
-    id: 'hartwell-architecture',
-    title: 'Hartwell Architecture',
-    subtitle: 'From Traditional to Digital Leadership',
-    description: 'How a 40-year-old architecture firm transformed their digital presence and increased qualified leads by 340% through strategic website redesign and content marketing.',
-    category: 'Architecture Firm',
-    status: 'published',
-    publishedDate: 'December 2024',
-    heroImage: '/images/case-studies/hartwell-hero.jpg',
-    heroImageAlt: 'Hartwell Architecture website redesign case study',
-    link: '/work/architecture-firm-redesign',
-    previewFeatures: [
-      '340% increase in qualified leads',
-      '95+ PageSpeed scores across all pages',
-      'Modern portfolio showcase system',
-      'Integrated project management workflows',
-      'SEO optimization for local market dominance'
-    ],
-    techStack: ['Svelte', 'TypeScript', 'Sanity CMS', 'Vercel', 'Google Analytics'],
-    clientType: 'Architecture Firm',
-    projectDuration: '4 months'
-  },
-  {
-    id: 'meridian-consulting',
-    title: 'Meridian Consulting',
-    subtitle: 'From Startup to Market Authority',
-    description: 'How a new professional services firm built complete digital infrastructure and generated $1.5M in revenue within their first year through strategic marketing automation.',
-    category: 'Professional Services',
-    status: 'published',
-    publishedDate: 'November 2024',
-    heroImage: '/images/case-studies/meridian-hero.jpg',
-    heroImageAlt: 'Meridian Consulting startup growth case study',
-    link: '/work/professional-services-startup',
-    previewFeatures: [
-      '$1.5M revenue in first year',
-      'Complete marketing automation system',
-      '98 PageSpeed score',
-      'Integrated CRM and project management',
-      'Content strategy that drove 80% of leads'
-    ],
-    techStack: ['Svelte', 'Node.js', 'Stripe', 'HubSpot', 'Vercel'],
-    clientType: 'Professional Services',
-    projectDuration: '6 months'
-  }
 ];
 
-// Filter and sort functionality
 let selectedCategory = $state('all');
 let sortBy = $state('newest');
 
@@ -102,7 +56,6 @@ const filteredAndSortedStudies = $derived(() => {
 
   return filtered.sort((a, b) => {
     if (sortBy === 'newest') {
-      // Put in-progress first, then sort by date
       if (a.status === 'in-progress' && b.status !== 'in-progress') return -1;
       if (b.status === 'in-progress' && a.status !== 'in-progress') return 1;
       
@@ -162,7 +115,7 @@ function getStatusBadge(study: CaseStudy) {
           <div class="text-sm text-gray-600">Lead Increase</div>
         </div>
         <div class="text-center">
-          <div class="text-3xl font-bold text-gray-900">$1.5M+</div>
+          <div class="text-3xl font-bold text-gray-900">$10K+</div>
           <div class="text-sm text-gray-600">Revenue Generated</div>
         </div>
         <div class="text-center">
@@ -335,7 +288,7 @@ function getStatusBadge(study: CaseStudy) {
       
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
         <a 
-          href="/contact"
+          href="/contact_us"
           class="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-lg font-semibold
                  bg-gray-900 text-white hover:bg-gray-800 hover:scale-105
                  focus:outline-none focus:ring-4 focus:ring-gray-300

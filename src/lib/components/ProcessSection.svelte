@@ -1,29 +1,20 @@
 <script lang="ts">
-import LazyThreeD from "$lib/components/LazyThreeD.svelte";
-import Static3DScene from "$lib/components/3d/Static3DScene.svelte";
-import Phase1Scene from "$lib/components/3d/Phase1Scene.svelte";
-import Phase2Scene from "$lib/components/3d/Phase2Scene.svelte";
-import Phase3Scene from "$lib/components/3d/Phase3Scene.svelte";
-
-// Enhanced state management with Svelte 5 runes
 let selectedPhase = $state<number>(0);
 let isTransitioning = $state<boolean>(false);
 
-// Enhanced phase data
 const phases = [
   {
     id: 'phase1',
     number: '01',
     title: 'Foundation & Optimization',
     subtitle: 'Building Your Digital Foundation',
-    description: 'We start with the basics - setting up your digital infrastructure, optimizing your existing assets, and establishing tracking systems that give you clear visibility into what\'s working.',
+    description: 'We start with the basics by setting up your digital infrastructure, optimizing your existing assets, and establishing tracking systems that give you clear visibility into what\'s working.',
     features: [
       'Complete website audit and technical optimization',
       'Analytics setup with custom dashboard integration',
       'SEO foundation with keyword strategy',
       'Performance optimization for speed and conversion'
     ],
-    component: Phase1Scene,
     color: '#7C9885'
   },
   {
@@ -38,7 +29,6 @@ const phases = [
       'Brand positioning and messaging refinement',
       'Social media integration and automation'
     ],
-    component: Phase2Scene,
     color: '#D4A574'
   },
   {
@@ -51,9 +41,8 @@ const phases = [
       'Campaign scaling with advanced automation',
       'Comprehensive analytics and reporting suite',
       'Strategic partnerships and referral programs',
-      'Continuous optimization and growth hacking'
+      'Continuous optimization and growth funneling'
     ],
-    component: Phase3Scene,
     color: '#8B9A9A'
   }
 ];
@@ -66,7 +55,7 @@ function selectPhase(index: number) {
   
   setTimeout(() => {
     isTransitioning = false;
-  }, 600);
+  }, 300);
 }
 
 function handleKeyPress(event: KeyboardEvent, index: number) {
@@ -112,10 +101,10 @@ function handleKeyPress(event: KeyboardEvent, index: number) {
 
     <!-- Main Content Area -->
     <div class="px-6 pb-20">
-      <div class="max-w-7xl mx-auto">
+      <div class="max-w-5xl mx-auto">
         
         <!-- Phase Navigation -->
-        <div class="flex justify-center mb-12">
+        <div class="flex justify-center mb-16">
           <div class="flex items-center gap-2 bg-white/5 backdrop-blur-sm rounded-2xl p-2 border border-white/10">
             {#each phases as phase, i}
               <button
@@ -134,101 +123,76 @@ function handleKeyPress(event: KeyboardEvent, index: number) {
           </div>
         </div>
 
-        <!-- Content Grid -->
-        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Content Panel - Centered -->
+        <div class="max-w-4xl mx-auto">
           
-          <!-- 3D Visualization - Full Size -->
-          <div class="order-2 lg:order-1">
-            <div class="relative aspect-square w-full max-w-2xl mx-auto">
-              
-              <!-- 3D Scene Container -->
-              <div class="absolute inset-0 rounded-3xl overflow-hidden bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-sm border border-white/20 shadow-2xl">
-                <LazyThreeD>
-                  <Static3DScene width="100%" height="100%">
-                    <svelte:component this={phases[selectedPhase].component} />
-                  </Static3DScene>
-                </LazyThreeD>
-                
-                <!-- Phase Indicator -->
-                <div class="absolute top-6 left-6 z-20">
-                  <div class="flex items-center gap-3 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-full border border-white/20">
-                    <div class="w-2 h-2 rounded-full animate-pulse" style="background-color: {phases[selectedPhase].color}"></div>
-                    <span class="text-white text-sm font-medium">Phase {phases[selectedPhase].number}</span>
-                  </div>
-                </div>
-                
-                <!-- Loading Indicator -->
-                {#if isTransitioning}
-                  <div class="absolute inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-30">
-                    <div class="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                  </div>
-                {/if}
+          <!-- Phase Header -->
+          <div class="text-center mb-12">
+            <div class="flex items-center justify-center gap-4 mb-6">
+              <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-2xl font-bold text-white border-2"
+                   style="background-color: {phases[selectedPhase].color}20; border-color: {phases[selectedPhase].color}">
+                {phases[selectedPhase].number}
               </div>
+            </div>
+            
+            <h3 class="font-syne text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
+              {phases[selectedPhase].title}
+            </h3>
+            
+            <p class="text-xl font-inter font-medium opacity-80 mb-8" style="color: {phases[selectedPhase].color}">
+              {phases[selectedPhase].subtitle}
+            </p>
+          </div>
 
-              <!-- Floating Enhancement Elements -->
-              <div class="absolute -top-4 -right-4 w-20 h-20 rounded-full blur-xl animate-pulse opacity-30"
-                   style="background: radial-gradient(circle, {phases[selectedPhase].color} 0%, transparent 70%);"></div>
-              <div class="absolute -bottom-4 -left-4 w-24 h-24 rounded-full blur-xl animate-pulse opacity-20"
-                   style="background: radial-gradient(circle, {phases[selectedPhase].color} 0%, transparent 70%); animation-delay: 1s;"></div>
+          <!-- Description -->
+          <div class="text-center mb-12">
+            <p class="text-xl lg:text-2xl font-inter leading-relaxed text-white/90 max-w-3xl mx-auto">
+              {phases[selectedPhase].description}
+            </p>
+          </div>
+
+          <!-- Features Grid -->
+          <div class="space-y-8">
+            <h4 class="font-syne text-2xl font-semibold text-white text-center flex items-center justify-center gap-3">
+              <span class="w-1 h-8 rounded-full" style="background-color: {phases[selectedPhase].color}"></span>
+              Key Deliverables
+              <span class="w-1 h-8 rounded-full" style="background-color: {phases[selectedPhase].color}"></span>
+            </h4>
+            
+            <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+              {#each phases[selectedPhase].features as feature, i}
+                <div class="flex items-start gap-4 p-6 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300 group"
+                     style="animation: slideInUp 0.4s ease-out {i * 0.1}s both;">
+                  <div class="flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center text-sm font-bold text-white mt-1 group-hover:scale-110 transition-transform duration-300"
+                       style="background-color: {phases[selectedPhase].color}">
+                    ✓
+                  </div>
+                  <p class="text-white/80 font-inter leading-relaxed text-lg">{feature}</p>
+                </div>
+              {/each}
             </div>
           </div>
 
-          <!-- Content Panel -->
-          <div class="order-1 lg:order-2 space-y-8">
-            
-            <!-- Phase Header -->
-            <div class="space-y-4">
-              <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl font-bold text-white border-2"
-                     style="background-color: {phases[selectedPhase].color}20; border-color: {phases[selectedPhase].color}">
-                  {phases[selectedPhase].number}
+          <!-- Phase Progress Indicator -->
+          <div class="mt-16 flex justify-center">
+            <div class="flex items-center gap-3">
+              {#each phases as _, i}
+                <div class="w-3 h-3 rounded-full transition-all duration-300 {
+                  i === selectedPhase 
+                    ? 'scale-125' 
+                    : 'opacity-40 hover:opacity-70'
+                }"
+                style="background-color: {i === selectedPhase ? phases[selectedPhase].color : '#ffffff'}">
                 </div>
-                <div>
-                  <h3 class="font-syne text-3xl lg:text-4xl font-bold text-white leading-tight">
-                    {phases[selectedPhase].title}
-                  </h3>
-                  <p class="text-lg font-inter font-medium opacity-80" style="color: {phases[selectedPhase].color}">
-                    {phases[selectedPhase].subtitle}
-                  </p>
-                </div>
-              </div>
+              {/each}
             </div>
+          </div>
 
-            <!-- Description -->
-            <div class="space-y-6">
-              <p class="text-lg lg:text-xl font-inter leading-relaxed text-white/90">
-                {phases[selectedPhase].description}
-              </p>
-            </div>
-
-            <!-- Features List -->
-            <div class="space-y-6">
-              <h4 class="font-syne text-xl font-semibold text-white flex items-center gap-3">
-                <span class="w-1 h-6 rounded-full" style="background-color: {phases[selectedPhase].color}"></span>
-                Key Deliverables
-              </h4>
-              
-              <div class="grid gap-4">
-                {#each phases[selectedPhase].features as feature, i}
-                  <div class="flex items-start gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all duration-300"
-                       style="animation: slideInUp 0.4s ease-out {i * 0.1}s both;">
-                    <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-xs font-bold text-white mt-0.5"
-                         style="background-color: {phases[selectedPhase].color}">
-                      ✓
-                    </div>
-                    <p class="text-white/80 font-inter leading-relaxed">{feature}</p>
-                  </div>
-                {/each}
-              </div>
-            </div>
-
-            <!-- Navigation Hint -->
-            <div class="pt-6">
-              <p class="text-sm text-white/60 font-inter flex items-center gap-2">
-                <span>Use the tabs above to explore each phase</span>
-                <span class="animate-pulse">👆</span>
-              </p>
-            </div>
+          <!-- Navigation Hint -->
+          <div class="mt-8 text-center">
+            <p class="text-sm text-white/60 font-inter flex items-center justify-center gap-2">
+              <span>Use the tabs above to explore each phase</span>
+            </p>
           </div>
         </div>
       </div>
@@ -280,4 +244,3 @@ function handleKeyPress(event: KeyboardEvent, index: number) {
     }
   }
 </style>
-

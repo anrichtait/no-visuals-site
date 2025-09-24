@@ -1,18 +1,15 @@
 <script lang="ts">
-  // ServicesSplitScreen.svelte
-  // Svelte 5 single-file component (TypeScript) implementing a responsive, accessible
-  // interactive split-screen services hero with hover/focus/touch support.
 
   type Service = {
     id: string;
-    title: string; // base headline (eg. "Web Design")
-    subtitle?: string; // base subheading
-    headline?: string; // hover headline (eg. "The Foundation")
+    title: string;
+    subtitle?: string;
+    headline?: string;
     description?: string;
     bullets?: string[];
     ctaText?: string;
     ctaHref?: string;
-    bgImage?: string; // url
+    bgImage?: string;
     bgImageAlt?: string;
   };
 

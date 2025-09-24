@@ -1,5 +1,7 @@
 <script lang="ts">
-  // Page metadata and configuration
+
+import { goto } from "$app/navigation";
+
   const pageTitle = "Services - Choose Your Pricing Plan";
   const pageDescription = "Solutions for every scenario - from website development to complete growth marketing strategies";
 
@@ -70,7 +72,13 @@
       ],
       buttonText: "Book a Call"
     }
-  ];
+];
+
+function handleContact() {
+    //analytics
+    goto('/contact_us');
+}
+
 </script>
 
 <svelte:head>
@@ -175,10 +183,10 @@
       </div>
       
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-md mx-auto">
-        <button class="w-full sm:w-auto bg-transparent border-2 border-[#7C9885] text-[#7C9885] hover:bg-[#7C9885] hover:text-white font-syne text-lg font-semibold py-3 px-8 rounded-xl transition-all duration-200 min-w-[160px]">
+        <button on:click={handleContact} class="w-full sm:w-auto bg-transparent border-2 border-[#7C9885] text-[#7C9885] hover:bg-[#7C9885] hover:text-white font-syne text-lg font-semibold py-3 px-8 rounded-xl transition-all duration-200 min-w-[160px]">
           Contact Us
         </button>
-        <button class="w-full sm:w-auto bg-[#EBEDF4] text-[#383838] hover:bg-white font-syne text-lg font-semibold py-3 px-8 rounded-xl transition-all duration-200 min-w-[160px]">
+        <button on:click={handleContact} class="w-full sm:w-auto bg-[#EBEDF4] text-[#383838] hover:bg-white font-syne text-lg font-semibold py-3 px-8 rounded-xl transition-all duration-200 min-w-[160px]">
           Schedule Call
         </button>
       </div>
@@ -193,12 +201,10 @@ h1 {
     font-weight: 700;
 }
 
-  /* Smooth scrolling */
   :global(html) {
     scroll-behavior: smooth;
   }
 
-  /* Custom hover effects */
   article {
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
   }
