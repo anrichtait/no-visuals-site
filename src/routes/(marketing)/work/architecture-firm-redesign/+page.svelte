@@ -3,7 +3,7 @@ import { Calendar, Sparkles, ArrowRight, ExternalLink, TrendingUp } from 'lucide
 </script>
 
 <svelte:head>
-  <title>Hartwell Architecture Redesign - Case Study | Tait Media Solutions</title>
+  <title>Hartwell Architecture Redesign - Case Study | No Visuals</title>
   <meta name="description" content="How a 40-year-old architecture firm transformed their digital presence and increased qualified leads by 340% through strategic website redesign and content marketing." />
   <meta property="og:title" content="Hartwell Architecture Redesign - Case Study" />
   <meta property="og:description" content="340% increase in qualified leads and $2.8M in new contracts through digital transformation." />

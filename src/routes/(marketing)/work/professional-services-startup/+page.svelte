@@ -3,7 +3,7 @@ import { Calendar, Sparkles, ArrowRight, ExternalLink, DollarSign, TrendingUp } 
 </script>
 
 <svelte:head>
-  <title>Meridian Consulting Startup Growth - Case Study | Tait Media Solutions</title>
+  <title>Meridian Consulting Startup Growth - Case Study | No Visuals</title>
   <meta name="description" content="How a new professional services firm built complete digital infrastructure and generated $1.5M in revenue within their first year through strategic marketing automation." />
   <meta property="og:title" content="Meridian Consulting Startup Growth - Case Study" />
   <meta property="og:description" content="$1.5M revenue in first year through complete digital infrastructure and marketing automation." />
@@ -340,7 +340,7 @@ import { Calendar, Sparkles, ArrowRight, ExternalLink, DollarSign, TrendingUp } 
 
         <div class="bg-gray-900 text-white rounded-xl p-8 mb-8">
           <blockquote class="text-lg font-light italic leading-relaxed mb-4">
-            "Working with Tait Media was the best investment we made as a startup. They didn't just build us a website - they built us a complete business development engine. Every system works together seamlessly, and we can see exactly where every dollar of revenue comes from."
+            "Working with No Visuals was the best investment we made as a startup. They didn't just build us a website - they built us a complete business development engine. Every system works together seamlessly, and we can see exactly where every dollar of revenue comes from."
           </blockquote>
           <footer class="text-gray-300">
             <strong>Michael Chen</strong>, Managing Principal<br>

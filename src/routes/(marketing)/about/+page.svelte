@@ -43,8 +43,8 @@ const values = [
 </script>
 
 <svelte:head>
-    <title>About - Tait Media Solutions</title>
-    <meta name="description" content="Learn about No Visualz, a performance-driven marketing agency for architecture and professional service firms. Founded by Anrich Tait." />
+    <title>About - No Visuals</title>
+    <meta name="description" content="Learn about No Visuals, a performance-driven marketing agency for architecture and professional service firms. Founded by Anrich Tait." />
     <!-- eslint-disable-next-line svelte/no-at-html-tags -->
     {@html jsonldScript}
 </svelte:head>
@@ -74,7 +74,7 @@ const values = [
                 </h1>
                 
                 <p class="text-xl lg:text-2xl text-white/80 font-inter leading-relaxed max-w-4xl mx-auto mb-12">
-                    No Visualz partners with architecture and professional service firms to replace outdated websites 
+                    No Visuals partners with architecture and professional service firms to replace outdated websites 
                     and vague marketing promises with systematic solutions that generate qualified leads.
                 </p>
 
@@ -245,7 +245,7 @@ const values = [
                     
                     <div class="space-y-6">
                         <p class="text-lg font-inter leading-relaxed text-[#2C2C2C]/90">
-                            I started Tait Media Solutions because I got tired of agencies 
+                            I started No Visuals because I got tired of agencies 
                             that sell smoke and mirrors instead of measurable growth. My 
                             mission is simple: radical transparency. 
                             Show the work, the metrics and the ROI. That clarity comes from years of doing things 

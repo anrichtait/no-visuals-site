@@ -3,9 +3,9 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
 </script>
 
 <svelte:head>
-  <title>Tait Media Solutions Rebrand - Case Study | Tait Media Solutions</title>
+  <title>No Visuals Rebrand - Case Study | No Visuals</title>
   <meta name="description" content="A comprehensive documentation of rebuilding our own digital presence from the ground up. From outdated WordPress to cutting-edge Svelte 5." />
-  <meta property="og:title" content="Tait Media Solutions Rebrand - Case Study" />
+  <meta property="og:title" content="No Visuals Rebrand - Case Study" />
   <meta property="og:description" content="How we transformed our own agency from outdated WordPress to cutting-edge Svelte 5 architecture." />
   <meta property="og:image" content="/images/case-studies/tait-rebrand-hero.jpg" />
   <meta property="og:type" content="article" />
@@ -42,7 +42,7 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
         </div>
         
         <h1 class="font-['Syne'] text-[clamp(3rem,8vw,6rem)] font-bold text-gray-900 leading-[0.9] mb-6">
-          Tait Media Solutions
+          No Visuals
         </h1>
         <p class="text-[clamp(1.25rem,4vw,2rem)] text-gray-700 font-light max-w-3xl mx-auto leading-tight">
           Complete Agency Transformation
@@ -297,7 +297,7 @@ import { Clock, Sparkles, ArrowRight, ExternalLink } from 'lucide-svelte';
             "If we can't successfully transform our own digital presence, how can we credibly help our clients do the same? This project is our commitment to practicing what we preach."
           </blockquote>
           <footer class="mt-4 text-gray-300">
-            <strong>Tait Media Solutions Team</strong>
+            <strong>No Visuals Team</strong>
           </footer>
         </div>
 

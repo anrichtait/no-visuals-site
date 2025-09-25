@@ -53,7 +53,7 @@ JSON.stringify(ldJson) + "<"
                 
                 <div class="space-y-8">
                     <p class="text-xl sm:text-2xl font-inter leading-relaxed text-[#2C2C2C] font-light">
-                        Tait Media Solutions is a <strong class="underline decoration-[#7C9885] decoration-2 underline-offset-4">performance-driven</strong> marketing agency for architecture and professional service
+                        No Visuals is a <strong class="underline decoration-[#7C9885] decoration-2 underline-offset-4">performance-driven</strong> marketing agency for architecture and professional service
                         firms. We replace outdated websites and vague marketing strategies with systematic solutions focused on one
                         thing: generating <strong class="font-semibold underline decoration-[#7C9885] decoration-2 underline-offset-4">qualified leads</strong>.
                     </p>

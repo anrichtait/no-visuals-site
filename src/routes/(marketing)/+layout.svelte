@@ -2,7 +2,9 @@
 import { WebsiteName, ContactEmail } from "./../../config"
 import NavBar from "$lib/components/NavBar.svelte"
 import { Mail, ExternalLink } from '$lib/icons'
-  import "../../app.css"
+import "../../app.css"
+import { injectAnalytics } from '@vercel/analytics/sveltekit'
+import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 
   interface Props {
     children?: import("svelte").Snippet
@@ -10,13 +12,16 @@ import { Mail, ExternalLink } from '$lib/icons'
 
   let { children }: Props = $props()
 
-  const currentYear = 2025;
+const currentYear = 2025;
+
+injectSpeedInsights();
 </script>
 
 <NavBar />
 
 <div class="">
-  {@render children?.()}
+    {@render children?.()}
+    <injectAnalytics />
 </div>
 
 <!-- Footer -->

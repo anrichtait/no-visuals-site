@@ -22,14 +22,14 @@ interface CaseStudy {
 const caseStudies: CaseStudy[] = [
   {
     id: 'tait-media-rebrand',
-    title: 'Tait Media Solutions',
+    title: 'No Visuals',
     subtitle: 'Complete Agency Transformation',
     description: 'A comprehensive documentation of rebuilding our own digital presence from the ground up. From an outdated Jekyll stack to cutting-edge Svelte 5, this case study will show the complete process of modernizing a marketing agency.',
     category: 'Agency Rebrand',
     status: 'in-progress',
     expectedCompletion: 'Q4 2025',
     heroImage: '/images/case-studies/tait-rebrand-hero.jpg',
-    heroImageAlt: 'Tait Media Solutions rebrand case study',
+    heroImageAlt: 'No Visuals rebrand case study',
     link: '/work/tait-media-rebrand',
     previewFeatures: [
       'Complete visual identity overhaul',
@@ -90,9 +90,9 @@ function getStatusBadge(study: CaseStudy) {
 </script>
 
 <svelte:head>
-  <title>Our Work - Case Studies | Tait Media Solutions</title>
+  <title>Our Work - Case Studies | No Visuals</title>
   <meta name="description" content="See how we've helped architecture and professional service firms transform their digital presence and drive measurable growth through our detailed case studies." />
-  <meta property="og:title" content="Our Work - Case Studies | Tait Media Solutions" />
+  <meta property="og:title" content="Our Work - Case Studies | No Visuals" />
   <meta property="og:description" content="Real results from real projects. See how we've helped firms achieve 340%+ lead increases and $1.5M+ revenue growth." />
   <meta property="og:type" content="website" />
 </svelte:head>

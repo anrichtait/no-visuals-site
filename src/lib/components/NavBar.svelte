@@ -91,7 +91,7 @@
                 on:mouseleave={() => (logoHover = false)}
                 on:focus={() => (logoHover = true)}
                 on:blur={() => (logoHover = false)}
-                aria-label="Tait Media Solutions — Home"
+                aria-label="No Visuals — Home"
             >
                 <svg
                     viewBox="0 0 100 80"
@@ -101,7 +101,7 @@
                     role="img"
                     aria-hidden="false"
                 >
-                    <title>Tait Media Solutions</title>
+                    <title>No Visuals</title>
 
                     <path
                         class="logo-path"

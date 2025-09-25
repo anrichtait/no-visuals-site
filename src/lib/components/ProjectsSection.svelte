@@ -4,14 +4,14 @@ import { ExternalLink, Clock, Sparkles } from '$lib/icons';
 export let projects = [
   {
     id: 'tait-media-rebrand',
-    title: 'Tait Media Solutions',
+    title: 'No Visuals',
     subtitle: 'Complete Agency Transformation',
     description: 'A comprehensive documentation of rebuilding our own digital presence from the ground up. From an outdated Jekyll stack to cutting-edge Svelte, this case study will show the complete process of modernizing a marketing agency.',
     category: 'Agency Rebrand',
     status: 'in-progress',
     expectedCompletion: 'Q4 2025',
     heroImage: '/images/case-studies/tait-rebrand-hero.jpg',
-    heroImageAlt: 'Tait Media Solutions rebrand case study',
+    heroImageAlt: 'No Visuals rebrand case study',
     link: '/work/tait-media-rebrand',
     previewFeatures: [
       'Complete brand identity overhaul',
