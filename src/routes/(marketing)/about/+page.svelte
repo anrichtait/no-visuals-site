@@ -52,7 +52,7 @@ const values = [
 <main class="relative">
     
     <!-- Hero Section -->
-    <section class="min-h-screen bg-[#2C2C2C] relative overflow-hidden flex items-center">
+    <section class="min-h-screen bg-[#2C2C2C] relative overflow-hidden flex items-center" data-theme="dark">
         <!-- Background Elements -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="absolute top-20 left-10 w-64 h-64 bg-[#7C9885]/5 rounded-full blur-3xl"></div>
@@ -163,7 +163,7 @@ const values = [
     </section>
 
     <!-- Values Section -->
-    <section class="min-h-screen bg-[#2C2C2C] relative overflow-hidden flex items-center">
+    <section class="min-h-screen bg-[#2C2C2C] relative overflow-hidden flex items-center" data-theme="dark">
         <!-- Background Elements -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="absolute top-20 right-10 w-64 h-64 bg-[#7C9885]/5 rounded-full blur-3xl"></div>
@@ -282,7 +282,7 @@ const values = [
     </section>
 
     <!-- Technology Section -->
-    <section class="min-h-screen bg-[#2C2C2C] relative overflow-hidden flex items-center">
+    <section class="min-h-screen bg-[#2C2C2C] relative overflow-hidden flex items-center" data-theme="dark">
         <!-- Background Elements -->
         <div class="absolute inset-0 pointer-events-none">
             <div class="absolute top-1/3 left-10 w-64 h-64 bg-[#7C9885]/5 rounded-full blur-3xl"></div>

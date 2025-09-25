@@ -66,9 +66,8 @@
 
   <div class="text-overlay">
     <h1 class="hero-heading">
-      <span class="line">TAIT</span>
-      <span class="line">MEDIA</span>
-      <span class="line">SOLUTIONS</span>
+      <span class="line">NO</span>
+      <span class="line">VISUALS</span>
     </h1>
   </div>
 </div>

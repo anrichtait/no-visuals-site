@@ -16,9 +16,9 @@
 
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'About Us' },
-    { href: '/work', label: 'Our Work' },
-    { href: '/contact_us', label: 'Contact Us' }
+    { href: '/about', label: 'About' },
+    { href: '/contact_us', label: 'Contact' },
+    { href: '/services', label: 'Services' },
   ];
 
   const detectCurrentTheme = () => {

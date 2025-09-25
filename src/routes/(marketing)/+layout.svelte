@@ -99,12 +99,12 @@ injectSpeedInsights();
                   </a>
                 </li>
                 <li>
-                  <a href="/blog" class="text-white/70 hover:text-white hover:underline transition-colors duration-200 text-sm font-light">
-                    Blog
+                  <a href="/services" class="text-white/70 hover:text-white hover:underline transition-colors duration-200 text-sm font-light">
+                    Services
                   </a>
                 </li>
                 <li>
-                  <a href="/pricing" class="text-white/70 hover:text-white hover:underline transition-colors duration-200 text-sm font-light">
+                  <a href="/services" class="text-white/70 hover:text-white hover:underline transition-colors duration-200 text-sm font-light">
                     Pricing
                   </a>
                 </li>
